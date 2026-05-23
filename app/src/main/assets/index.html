@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Kerala Homes — Luxury Real Estate</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #C9A84C;
+  --gold-light: #E8C97A;
+  --gold-dim: #8a6e30;
+  --obsidian: #0C0C0F;
+  --deep: #13131A;
+  --surface: #1A1A24;
+  --surface2: #22222F;
+  --surface3: #2A2A3A;
+  --text: #F0EDE8;
+  --text-dim: #9A9590;
+  --text-muted: #5A5650;
+  --border: rgba(201,168,76,0.15);
+  --border-hover: rgba(201,168,76,0.4);
+  --serif: 'Cormorant Garamond', serif;
+  --sans: 'DM Sans', sans-serif;
+  --glass: rgba(255,255,255,0.03);
+  --glow: 0 0 40px rgba(201,168,76,0.1);
+  --green: #4ADE80;
+  --red: #F87171;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--obsidian);color:var(--text);font-family:var(--sans);font-weight:300;display:flex;justify-content:center;align-items:flex-start;min-height:100vh;overflow-x:hidden;}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--deep)}::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:2px}
+img{object-fit:cover;display:block;}
+
+/* PHONE SHELL */
+.phone{
+  width:390px;min-height:844px;
+  background:var(--obsidian);
+  border-radius:46px;
+  overflow:hidden;
+  box-shadow:0 0 0 10px #1A1A1A, 0 0 0 11px #333, 0 40px 100px rgba(0,0,0,0.7), 0 0 60px rgba(201,168,76,0.06);
+  position:relative;
+  display:flex;flex-direction:column;
+  flex-shrink:0;
+}
+/* Status bar */
+.statusbar{background:var(--deep);padding:12px 24px 6px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0;border-bottom:1px solid var(--border);}
+.sb-time{font-family:var(--sans);font-weight:500;font-size:13px;color:var(--text);}
+.sb-icons{font-size:12px;color:var(--text-dim);}
+
+/* SCREENS */
+.screen{flex:1;overflow-y:auto;overflow-x:hidden;display:none;background:var(--obsidian);}
+.screen.active{display:block;}
+::-webkit-scrollbar{width:2px}
+
+/* BOTTOM NAV */
+.bnav{background:var(--deep);border-top:1px solid var(--border);display:flex;padding:8px 0 16px;flex-shrink:0;backdrop-filter:blur(20px);}
+.bni{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;border:none;background:transparent;padding:4px 0;}
+.bni-ic{font-size:18px;transition:all 0.25s;filter:grayscale(1);opacity:0.4;}
+.bni-lb{font-family:var(--sans);font-size:9px;font-weight:500;letter-spacing:0.5px;color:var(--text-muted);transition:all 0.25s;}
+.bni.on .bni-ic{filter:none;opacity:1;}
+.bni.on .bni-lb{color:var(--gold);}
+.bn-center{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;border:none;background:transparent;padding:4px 0;}
+.bn-plus{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-light));display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--obsidian);font-weight:900;margin-top:-18px;box-shadow:0 4px 20px rgba(201,168,76,0.4),0 0 0 2px var(--deep);}
+.bn-center-lb{font-size:9px;font-weight:500;color:var(--gold);letter-spacing:0.5px;}
+
+/* ===== HOME SCREEN ===== */
+/* Hero header */
+.home-hdr{
+  background:linear-gradient(180deg, var(--deep) 0%, var(--obsidian) 100%);
+  padding:20px 20px 24px;
+  border-bottom:1px solid var(--border);
+  position:relative;
+  overflow:hidden;
+}
+.home-hdr::before{
+  content:'';position:absolute;top:-40px;right:-40px;width:180px;height:180px;
+  background:radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+  pointer-events:none;
+}
+.hdr-row{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;}
+.hdr-brand{display:flex;flex-direction:column;}
+.hdr-loc{font-size:9px;color:var(--gold);letter-spacing:2px;font-weight:500;text-transform:uppercase;margin-bottom:4px;}
+.hdr-title{font-family:var(--serif);font-size:26px;font-weight:400;color:var(--text);letter-spacing:-0.3px;line-height:1.1;}
+.hdr-title em{color:var(--gold);font-style:italic;}
+.post-btn{
+  background:linear-gradient(135deg,var(--gold),var(--gold-light));
+  border:none;border-radius:10px;padding:9px 16px;
+  font-family:var(--sans);font-size:10px;font-weight:500;
+  color:var(--obsidian);cursor:pointer;letter-spacing:0.8px;text-transform:uppercase;
+  box-shadow:0 4px 16px rgba(201,168,76,0.35);
+  white-space:nowrap;
+}
+/* Search */
+.search-wrap{position:relative;}
+.search-icon{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--gold);font-size:13px;}
+.search-input{
+  width:100%;padding:12px 14px 12px 38px;
+  background:var(--surface);border:1px solid var(--border);border-radius:12px;
+  font-family:var(--sans);font-size:12px;font-weight:400;color:var(--text);
+  outline:none;box-sizing:border-box;
+  transition:border-color 0.2s;
+}
+.search-input::placeholder{color:var(--text-muted);}
+.search-input:focus{border-color:var(--gold-dim);}
+
+/* Filter chips */
+.chips-row{overflow-x:auto;display:flex;gap:8px;padding:14px 20px 6px;scrollbar-width:none;}
+.chips-row::-webkit-scrollbar{display:none;}
+.chip{
+  padding:6px 14px;border-radius:20px;border:1px solid var(--border);
+  font-family:var(--sans);font-size:11px;font-weight:400;cursor:pointer;
+  white-space:nowrap;flex-shrink:0;
+  background:transparent;color:var(--text-dim);
+  transition:all 0.2s;
+}
+.chip.on{background:rgba(201,168,76,0.12);border-color:var(--gold-dim);color:var(--gold);}
+.chip:hover{border-color:var(--gold-dim);color:var(--text);}
+
+/* Gold divider */
+.gold-div{height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);margin:2px 20px;}
+
+/* Section titles */
+.sect{padding:18px 20px 6px;}
+.sect-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+.sect-t{font-family:var(--serif);font-size:20px;font-weight:400;color:var(--text);letter-spacing:-0.2px;}
+.sect-s{font-size:10px;color:var(--gold);font-weight:400;letter-spacing:1px;text-transform:uppercase;cursor:pointer;}
+
+/* Featured carousel */
+.feat-scroll{overflow-x:auto;display:flex;gap:14px;padding:0 20px 6px;scrollbar-width:none;}
+.feat-scroll::-webkit-scrollbar{display:none;}
+.fcard{
+  min-width:230px;border-radius:18px;overflow:hidden;cursor:pointer;flex-shrink:0;
+  border:1px solid var(--border);
+  transition:transform 0.25s, box-shadow 0.25s;
+  position:relative;
+}
+.fcard:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.4),0 0 0 1px var(--gold-dim);}
+.fcard-img{height:140px;position:relative;overflow:hidden;}
+.fcard-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s;}
+.fcard:hover .fcard-img img{transform:scale(1.05);}
+.fcard-img-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,12,15,0.1) 0%,rgba(12,12,15,0.7) 100%);}
+.fcard-badge{position:absolute;top:10px;left:10px;display:flex;gap:5px;}
+.fcard-price{position:absolute;bottom:10px;left:12px;font-family:var(--serif);font-size:19px;font-weight:400;color:var(--text);letter-spacing:-0.3px;}
+.fcard-heart{position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:50%;background:rgba(12,12,15,0.5);border:1px solid var(--border);color:var(--text-dim);font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);}
+.badge{font-size:8px;font-weight:500;letter-spacing:0.8px;padding:3px 8px;border-radius:4px;text-transform:uppercase;}
+.badge-r{background:rgba(74,222,128,0.15);color:var(--green);border:1px solid rgba(74,222,128,0.3);}
+.badge-s{background:rgba(201,168,76,0.15);color:var(--gold);border:1px solid rgba(201,168,76,0.3);}
+.badge-n{background:rgba(96,165,250,0.15);color:#60A5FA;border:1px solid rgba(96,165,250,0.3);}
+.fcard-body{background:var(--surface);padding:10px 14px 13px;}
+.fname{font-family:var(--serif);font-size:14px;font-weight:400;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px;}
+.floc{font-size:9px;color:var(--text-muted);letter-spacing:0.3px;}
+
+/* Stats bar */
+.stats{
+  margin:4px 20px 14px;padding:14px 20px;
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  display:flex;justify-content:space-around;
+  position:relative;overflow:hidden;
+}
+.stats::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);}
+.sv{font-family:var(--serif);font-size:18px;font-weight:600;color:var(--gold);text-align:center;}
+.sl{font-size:8px;color:var(--text-muted);letter-spacing:0.8px;text-align:center;margin-top:2px;text-transform:uppercase;}
+.st-div{width:1px;background:var(--border);}
+
+/* Property cards */
+.pcard{
+  background:var(--surface);border:1px solid var(--border);border-radius:18px;
+  overflow:hidden;margin:0 20px 16px;cursor:pointer;
+  transition:transform 0.25s, box-shadow 0.25s,border-color 0.25s;
+}
+.pcard:hover{transform:translateY(-3px);box-shadow:var(--glow);border-color:var(--gold-dim);}
+.pcard-img{height:185px;position:relative;overflow:hidden;}
+.pcard-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s;}
+.pcard:hover .pcard-img img{transform:scale(1.04);}
+.pcard-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,12,15,0.08) 0%,rgba(12,12,15,0.65) 100%);}
+.pcard-badges{position:absolute;top:12px;left:12px;display:flex;gap:6px;}
+.pcard-heart{position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:50%;background:rgba(12,12,15,0.5);border:1px solid var(--border);color:var(--text-dim);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);transition:all 0.2s;}
+.pcard-heart:hover{border-color:var(--gold-dim);color:var(--gold);}
+.pcard-price{position:absolute;bottom:14px;left:14px;}
+.pcard-price-val{font-family:var(--serif);font-size:22px;font-weight:400;color:var(--text);letter-spacing:-0.5px;}
+.pcard-body{padding:13px 15px 15px;}
+.pcard-tag{font-size:9px;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:5px;}
+.pcard-title{font-family:var(--serif);font-size:17px;font-weight:400;color:var(--text);margin-bottom:4px;line-height:1.3;}
+.pcard-loc{font-size:10px;color:var(--text-dim);margin-bottom:12px;display:flex;align-items:center;gap:4px;}
+.pcard-specs{display:flex;border-top:1px solid var(--border);padding-top:11px;gap:0;}
+.spec-i{flex:1;text-align:center;}
+.spec-i+.spec-i{border-left:1px solid var(--border);}
+.spec-v{font-family:var(--serif);font-size:15px;font-weight:600;color:var(--gold);}
+.spec-k{font-size:8px;color:var(--text-muted);letter-spacing:0.5px;text-transform:uppercase;margin-top:1px;}
+
+/* ===== DETAIL SCREEN ===== */
+.det-hero{height:280px;position:relative;overflow:hidden;}
+.det-hero img{width:100%;height:100%;object-fit:cover;}
+.det-hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,12,15,0.3) 0%,rgba(12,12,15,0.75) 100%);}
+.det-back{position:absolute;top:14px;left:14px;width:38px;height:38px;border-radius:50%;background:rgba(12,12,15,0.6);border:1px solid var(--border);color:var(--text);font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);transition:all 0.2s;}
+.det-back:hover{border-color:var(--gold-dim);}
+.det-share{position:absolute;top:14px;right:52px;width:38px;height:38px;border-radius:50%;background:rgba(12,12,15,0.6);border:1px solid var(--border);color:var(--text-dim);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);}
+.det-heart{position:absolute;top:14px;right:10px;width:38px;height:38px;border-radius:50%;background:rgba(12,12,15,0.6);border:1px solid var(--border);color:var(--text-dim);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);}
+.det-pricebar{position:absolute;bottom:16px;left:16px;right:16px;display:flex;justify-content:space-between;align-items:flex-end;}
+.det-price{font-family:var(--serif);font-size:26px;font-weight:400;color:var(--text);letter-spacing:-0.5px;}
+.det-subloc{font-size:10px;color:rgba(240,237,232,0.5);margin-top:2px;}
+.det-body{padding:20px 18px 100px;}
+.det-tag{font-size:9px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;}
+.det-title{font-family:var(--serif);font-size:24px;font-weight:400;color:var(--text);margin-bottom:6px;line-height:1.2;}
+.det-loc{font-size:11px;color:var(--text-dim);margin-bottom:18px;}
+.spec-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:18px;}
+.spec-box{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:11px 6px;text-align:center;}
+.spec-box-ic{font-size:18px;margin-bottom:4px;}
+.spec-box-v{font-family:var(--serif);font-size:14px;font-weight:600;color:var(--gold);}
+.spec-box-k{font-size:8px;color:var(--text-muted);letter-spacing:0.4px;text-transform:uppercase;}
+.info-panel{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:15px;margin-bottom:12px;position:relative;overflow:hidden;}
+.info-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);}
+.info-t{font-family:var(--serif);font-size:15px;font-weight:400;color:var(--text);margin-bottom:8px;}
+.info-p{font-size:11px;color:var(--text-dim);line-height:1.9;}
+.amen-row{display:flex;flex-wrap:wrap;gap:7px;}
+.amen{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:5px 10px;font-size:10px;color:var(--text-dim);letter-spacing:0.3px;}
+.map-ph{background:var(--surface2);border-radius:12px;height:100px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.det-cta{position:sticky;bottom:0;background:var(--deep);border-top:1px solid var(--border);padding:14px 18px 18px;display:flex;gap:10px;}
+.cta-call{flex:1;padding:13px;border-radius:11px;border:1px solid var(--border);background:transparent;font-family:var(--sans);font-size:11px;font-weight:500;color:var(--text);cursor:pointer;letter-spacing:0.5px;transition:all 0.2s;}
+.cta-call:hover{border-color:var(--gold-dim);}
+.cta-wa{flex:2;padding:13px;border-radius:11px;border:none;background:linear-gradient(135deg,var(--gold),var(--gold-light));font-family:var(--sans);font-size:11px;font-weight:500;color:var(--obsidian);cursor:pointer;letter-spacing:0.5px;box-shadow:0 4px 16px rgba(201,168,76,0.35);transition:all 0.2s;}
+.cta-wa:hover{box-shadow:0 6px 24px rgba(201,168,76,0.5);}
+
+/* ===== POST SCREEN ===== */
+.post-hdr{background:var(--deep);padding:18px 20px 22px;border-bottom:1px solid var(--border);}
+.post-row{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+.bk-btn{width:34px;height:34px;border-radius:50%;background:var(--surface);border:1px solid var(--border);color:var(--text-dim);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
+.bk-btn:hover{border-color:var(--gold-dim);color:var(--gold);}
+.post-title{font-family:var(--serif);font-size:20px;color:var(--text);}
+.post-sub{font-size:10px;color:var(--text-muted);margin-top:1px;letter-spacing:0.5px;}
+.prog-row{display:flex;gap:6px;}
+.prog-seg{height:3px;flex:1;border-radius:2px;transition:all 0.3s;}
+.fwrap{padding:20px 18px;}
+.fst{font-family:var(--serif);font-size:20px;color:var(--text);margin-bottom:4px;}
+.fss{font-size:11px;color:var(--text-muted);margin-bottom:18px;}
+.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px;}
+.tcard{
+  padding:18px 14px;border-radius:14px;border:1px solid var(--border);
+  background:var(--surface);cursor:pointer;text-align:center;transition:all 0.25s;
+}
+.tcard.on{border-color:var(--gold-dim);background:rgba(201,168,76,0.08);box-shadow:0 0 20px rgba(201,168,76,0.1);}
+.tcard.on .tnm{color:var(--gold);}
+.tcard.on .tsub{color:var(--text-dim);}
+.tic{font-size:28px;margin-bottom:7px;}
+.tnm{font-family:var(--serif);font-size:15px;color:var(--text-dim);transition:color 0.2s;}
+.tsub{font-size:9px;color:var(--text-muted);margin-top:2px;transition:color 0.2s;}
+.cat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:18px;}
+.ctile{
+  padding:11px 5px;border-radius:12px;border:1px solid var(--border);
+  background:var(--surface);cursor:pointer;text-align:center;transition:all 0.25s;
+}
+.ctile.on{border-color:var(--gold-dim);background:rgba(201,168,76,0.08);}
+.ctile.on .cnm{color:var(--gold);}
+.cic{font-size:20px;}
+.cnm{font-size:9px;color:var(--text-muted);margin-top:4px;letter-spacing:0.3px;transition:color 0.2s;}
+.flbl{font-size:9px;font-weight:500;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;}
+.finp{
+  width:100%;padding:12px 14px;border-radius:11px;border:1px solid var(--border);
+  background:var(--surface);font-family:var(--sans);font-size:12px;color:var(--text);
+  outline:none;box-sizing:border-box;transition:border-color 0.2s;
+}
+.finp:focus{border-color:var(--gold-dim);}
+.finp::placeholder{color:var(--text-muted);}
+.fsel{
+  width:100%;padding:12px 14px;border-radius:11px;border:1px solid var(--border);
+  background:var(--surface);font-family:var(--sans);font-size:12px;color:var(--text);
+  outline:none;appearance:none;box-sizing:border-box;
+}
+.fsel option{background:var(--surface2);}
+.fta{
+  width:100%;padding:12px 14px;border-radius:11px;border:1px solid var(--border);
+  background:var(--surface);font-family:var(--sans);font-size:11px;color:var(--text);
+  outline:none;resize:vertical;min-height:80px;box-sizing:border-box;
+}
+.fta::placeholder{color:var(--text-muted);}
+.frow2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.fgrp{margin-bottom:14px;}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px;}
+.pmain{aspect-ratio:1;border-radius:12px;background:var(--surface2);border:1px dashed var(--gold-dim);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s;}
+.pmain:hover{background:rgba(201,168,76,0.06);}
+.pslot{aspect-ratio:1;border-radius:12px;border:1px dashed var(--border);background:var(--surface);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s;}
+.pslot:hover{border-color:var(--gold-dim);}
+.tip{border-radius:12px;padding:13px;display:flex;gap:10px;align-items:flex-start;margin-bottom:14px;}
+.tip.amber{background:rgba(201,168,76,0.07);border:1px solid rgba(201,168,76,0.2);}
+.tip.green{background:rgba(74,222,128,0.06);border:1px solid rgba(74,222,128,0.2);}
+.tipt{font-size:10px;line-height:1.8;}
+.pvc{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px;margin-bottom:14px;position:relative;overflow:hidden;}
+.pvc::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);}
+.pvl{font-size:8px;font-weight:500;color:var(--gold);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:8px;}
+.pvt{font-family:var(--serif);font-size:15px;color:var(--text);margin-bottom:3px;}
+.pvlc{font-size:10px;color:var(--text-muted);margin-bottom:6px;}
+.pvp{font-family:var(--serif);font-size:20px;color:var(--gold);}
+.nav-btns{display:flex;gap:10px;padding-top:8px;}
+.nbb{flex:1;padding:13px;border-radius:11px;border:1px solid var(--border);background:transparent;font-family:var(--sans);font-size:11px;font-weight:400;color:var(--text-dim);cursor:pointer;letter-spacing:0.5px;transition:all 0.2s;}
+.nbb:hover{border-color:var(--gold-dim);color:var(--text);}
+.nbn{flex:2;padding:13px;border-radius:11px;border:none;background:linear-gradient(135deg,var(--gold),var(--gold-light));font-family:var(--sans);font-size:11px;font-weight:500;color:var(--obsidian);cursor:pointer;letter-spacing:0.5px;box-shadow:0 4px 14px rgba(201,168,76,0.3);transition:all 0.2s;}
+.nbs{flex:2;padding:13px;border-radius:11px;border:none;background:rgba(74,222,128,0.15);border:1px solid rgba(74,222,128,0.4);font-family:var(--sans);font-size:11px;font-weight:500;color:var(--green);cursor:pointer;letter-spacing:0.5px;}
+
+/* ===== BROKERS SCREEN ===== */
+.broker-hdr{background:var(--deep);padding:20px 20px 22px;border-bottom:1px solid var(--border);}
+.brok-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:18px;margin:0 20px 14px;transition:all 0.25s;position:relative;overflow:hidden;}
+.brok-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);}
+.brok-card:hover{border-color:var(--gold-dim);box-shadow:var(--glow);}
+.brok-row{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
+.brok-av{width:56px;height:56px;border-radius:16px;border:1px solid var(--gold-dim);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:20px;font-weight:600;color:var(--gold);flex-shrink:0;}
+.brok-nm{font-family:var(--serif);font-size:16px;color:var(--text);margin-bottom:2px;}
+.brok-role{font-size:10px;color:var(--text-muted);margin-bottom:3px;}
+.brok-dist{font-size:9px;color:var(--gold);letter-spacing:0.8px;text-transform:uppercase;}
+.brok-rating{margin-left:auto;text-align:right;}
+.brok-stars{font-family:var(--serif);font-size:18px;color:var(--gold);}
+.brok-rl{font-size:8px;color:var(--text-muted);margin-top:1px;}
+.brok-stats{display:flex;gap:0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:10px 0;margin-bottom:12px;}
+.brok-s{flex:1;text-align:center;}
+.brok-sv{font-family:var(--serif);font-size:15px;color:var(--gold);}
+.brok-sk{font-size:8px;color:var(--text-muted);letter-spacing:0.4px;text-transform:uppercase;margin-top:1px;}
+.brok-btns{display:flex;gap:8px;}
+.bb{flex:1;padding:10px;border-radius:9px;border:1px solid var(--border);background:transparent;font-family:var(--sans);font-size:10px;color:var(--text-dim);cursor:pointer;letter-spacing:0.3px;transition:all 0.2s;}
+.bb:hover{border-color:var(--gold-dim);color:var(--gold);}
+.bbwa{flex:1;padding:10px;border-radius:9px;border:none;background:rgba(37,211,102,0.12);border:1px solid rgba(37,211,102,0.3);font-family:var(--sans);font-size:10px;color:#25D366;cursor:pointer;}
+.bbg{flex:1;padding:10px;border-radius:9px;border:none;background:linear-gradient(135deg,var(--gold),var(--gold-light));font-family:var(--sans);font-size:10px;color:var(--obsidian);cursor:pointer;font-weight:500;}
+
+/* ===== SAVED / PROFILE ===== */
+.saved-item{background:var(--surface);border:1px solid var(--border);border-radius:14px;margin:0 20px 12px;overflow:hidden;display:flex;cursor:pointer;transition:all 0.2s;}
+.saved-item:hover{border-color:var(--gold-dim);}
+.saved-thumb{width:90px;height:80px;flex-shrink:0;position:relative;overflow:hidden;}
+.saved-thumb img{width:100%;height:100%;object-fit:cover;}
+.saved-body{padding:12px 13px;flex:1;}
+.saved-tag{font-size:8px;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:3px;}
+.saved-t{font-family:var(--serif);font-size:13px;color:var(--text);margin-bottom:2px;}
+.saved-l{font-size:9px;color:var(--text-muted);margin-bottom:5px;}
+.saved-p{font-family:var(--serif);font-size:15px;color:var(--gold);}
+
+.prof-hdr{background:var(--deep);padding:24px 20px;border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
+.prof-hdr::before{content:'';position:absolute;top:-30px;right:-30px;width:140px;height:140px;background:radial-gradient(circle,rgba(201,168,76,0.07) 0%,transparent 70%);pointer-events:none;}
+.prof-av{width:62px;height:62px;border-radius:18px;background:rgba(201,168,76,0.12);border:1px solid var(--gold-dim);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:26px;color:var(--gold);}
+.prof-nm{font-family:var(--serif);font-size:20px;color:var(--text);margin-top:10px;}
+.prof-role{font-size:10px;color:var(--text-muted);}
+.prof-badge{display:inline-flex;align-items:center;gap:5px;margin-top:6px;padding:3px 10px;border-radius:4px;background:rgba(201,168,76,0.1);border:1px solid var(--gold-dim);font-size:9px;color:var(--gold);letter-spacing:0.8px;}
+.prof-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:16px 20px;}
+.prof-sb{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:13px;text-align:center;}
+.prof-sv{font-family:var(--serif);font-size:19px;color:var(--gold);}
+.prof-sk{font-size:8px;color:var(--text-muted);letter-spacing:0.5px;text-transform:uppercase;margin-top:2px;}
+.prof-menu{background:var(--surface);border:1px solid var(--border);border-radius:16px;margin:0 20px;overflow:hidden;position:relative;}
+.prof-menu::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);}
+.pm-item{padding:15px 18px;display:flex;align-items:center;gap:13px;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.2s;}
+.pm-item:last-child{border-bottom:none;}
+.pm-item:hover{background:var(--surface2);}
+.pm-ic{font-size:17px;width:24px;text-align:center;}
+.pm-lb{font-size:13px;color:var(--text);flex:1;}
+.pm-ar{color:var(--text-muted);font-size:14px;}
+
+/* Contact sheet */
+.sheet-overlay{display:none;position:absolute;inset:0;background:rgba(12,12,15,0.8);z-index:200;align-items:flex-end;backdrop-filter:blur(4px);}
+.sheet{background:var(--surface);border-radius:24px 24px 0 0;padding:22px 20px 32px;width:100%;border-top:1px solid var(--border);position:relative;}
+.sheet::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);}
+.sheet-pill{width:36px;height:3px;background:var(--border);border-radius:2px;margin:0 auto 18px;}
+.sheet-t{font-family:var(--serif);font-size:20px;color:var(--text);margin-bottom:2px;}
+.sheet-s{font-size:10px;color:var(--text-muted);margin-bottom:18px;letter-spacing:0.3px;}
+.sht-btn{width:100%;padding:14px;border-radius:12px;font-family:var(--sans);font-size:12px;font-weight:400;cursor:pointer;margin-bottom:8px;border:none;letter-spacing:0.5px;}
+</style>
+</head>
+<body>
+
+<div class="phone">
+  <!-- Status bar -->
+  <div class="statusbar">
+    <span class="sb-time" id="clk">09:41</span>
+    <span class="sb-icons">▲▲ ⬛</span>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       HOME SCREEN
+  ═══════════════════════════════════════════════ -->
+  <div class="screen active" id="s-home">
+    <div class="home-hdr">
+      <div class="hdr-row">
+        <div class="hdr-brand">
+          <div class="hdr-loc">📍 Kerala, India</div>
+          <div class="hdr-title">Kerala <em>Homes</em></div>
+        </div>
+        <button class="post-btn" onclick="go('post')">+ POST AD</button>
+      </div>
+      <div class="search-wrap">
+        <span class="search-icon">✦</span>
+        <input class="search-input" placeholder="Search area, locality, property type…"/>
+      </div>
+    </div>
+
+    <!-- District chips -->
+    <div class="chips-row" id="dc">
+      <button class="chip on" onclick="dchip(this)">🌴 All Kerala</button>
+      <button class="chip" onclick="dchip(this)">Thrissur</button>
+      <button class="chip" onclick="dchip(this)">Ernakulam</button>
+      <button class="chip" onclick="dchip(this)">Kozhikode</button>
+      <button class="chip" onclick="dchip(this)">Thiruvananthapuram</button>
+      <button class="chip" onclick="dchip(this)">Palakkad</button>
+      <button class="chip" onclick="dchip(this)">Malappuram</button>
+      <button class="chip" onclick="dchip(this)">Kottayam</button>
+      <button class="chip" onclick="dchip(this)">Kannur</button>
+    </div>
+    <!-- Type chips -->
+    <div class="chips-row" id="tc" style="padding-top:0;gap:6px;">
+      <button class="chip on" onclick="tchip(this)">All</button>
+      <button class="chip" onclick="tchip(this)">🏠 Rent</button>
+      <button class="chip" onclick="tchip(this)">🏷 Sale</button>
+      <span style="width:1px;background:var(--border);margin:0 2px;display:block;height:22px;align-self:center;flex-shrink:0;"></span>
+      <button class="chip" onclick="tchip(this)">House</button>
+      <button class="chip" onclick="tchip(this)">Flat</button>
+      <button class="chip" onclick="tchip(this)">Villa</button>
+      <button class="chip" onclick="tchip(this)">Plot</button>
+    </div>
+
+    <div class="gold-div"></div>
+
+    <!-- Featured -->
+    <div class="sect" style="padding-bottom:0;">
+      <div class="sect-hdr">
+        <span class="sect-t">Featured Properties</span>
+        <span class="sect-s">View all →</span>
+      </div>
+    </div>
+    <div class="feat-scroll">
+      <div class="fcard" onclick="go('detail',0)">
+        <div class="fcard-img">
+          <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=500&q=85" alt="House" loading="lazy"/>
+          <div class="fcard-img-overlay"></div>
+          <div class="fcard-badge"><span class="badge badge-r">For Rent</span><span class="badge badge-n">New</span></div>
+          <div class="fcard-price">₹28,000<span style="font-size:12px;color:rgba(240,237,232,0.5)">/mo</span></div>
+          <button class="fcard-heart">♡</button>
+        </div>
+        <div class="fcard-body">
+          <div class="fname">4BHK Independent House</div>
+          <div class="floc">📍 Pattom, Thiruvananthapuram</div>
+        </div>
+      </div>
+      <div class="fcard" onclick="go('detail',1)">
+        <div class="fcard-img">
+          <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?w=500&q=85" alt="Villa" loading="lazy"/>
+          <div class="fcard-img-overlay"></div>
+          <div class="fcard-badge"><span class="badge badge-s">For Sale</span></div>
+          <div class="fcard-price">₹9.5 Cr</div>
+          <button class="fcard-heart">♡</button>
+        </div>
+        <div class="fcard-body">
+          <div class="fname">Luxury Villa with Pool</div>
+          <div class="floc">📍 Kakkanad, Ernakulam</div>
+        </div>
+      </div>
+      <div class="fcard" onclick="go('detail',2)">
+        <div class="fcard-img">
+          <img src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=500&q=85" alt="Beachfront" loading="lazy"/>
+          <div class="fcard-img-overlay"></div>
+          <div class="fcard-badge"><span class="badge badge-s">For Sale</span><span class="badge badge-n">New</span></div>
+          <div class="fcard-price">₹1.85 Cr</div>
+          <button class="fcard-heart">♡</button>
+        </div>
+        <div class="fcard-body">
+          <div class="fname">Beachfront Villa, Cherai</div>
+          <div class="floc">📍 Cherai Beach, Ernakulam</div>
+        </div>
+      </div>
+      <div class="fcard" onclick="go('detail',3)">
+        <div class="fcard-img">
+          <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=500&q=85" alt="Heritage" loading="lazy"/>
+          <div class="fcard-img-overlay"></div>
+          <div class="fcard-badge"><span class="badge badge-s">For Sale</span></div>
+          <div class="fcard-price">₹75 L</div>
+          <button class="fcard-heart">♡</button>
+        </div>
+        <div class="fcard-body">
+          <div class="fname">Nalukettu Heritage Home</div>
+          <div class="floc">📍 Thrissur City</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats">
+      <div><div class="sv">174<span style="font-size:14px;color:var(--gold-dim)">+</span></div><div class="sl">Active Listings</div></div>
+      <div class="st-div"></div>
+      <div><div class="sv">14</div><div class="sl">Districts</div></div>
+      <div class="st-div"></div>
+      <div><div class="sv">4.9<span style="font-size:12px;color:var(--gold-dim)">★</span></div><div class="sl">Avg Rating</div></div>
+    </div>
+
+    <!-- All listings -->
+    <div class="sect">
+      <div class="sect-hdr" style="margin-bottom:16px;">
+        <span class="sect-t">All Properties</span>
+        <span class="sect-s" style="font-size:9px;">Latest First</span>
+      </div>
+    </div>
+
+    <!-- Property Cards -->
+    <div class="pcard" onclick="go('detail',0)">
+      <div class="pcard-img">
+        <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=720&q=85" alt="" loading="lazy"/>
+        <div class="pcard-overlay"></div>
+        <div class="pcard-badges"><span class="badge badge-r">For Rent</span><span class="badge badge-n">New</span></div>
+        <button class="pcard-heart">♡</button>
+        <div class="pcard-price"><div class="pcard-price-val">₹28,000<span style="font-size:13px;opacity:0.5">/mo</span></div></div>
+      </div>
+      <div class="pcard-body">
+        <div class="pcard-tag">House Rent</div>
+        <div class="pcard-title">4BHK Independent House</div>
+        <div class="pcard-loc">📍 Pattom, Thiruvananthapuram, Kerala</div>
+        <div class="pcard-specs">
+          <div class="spec-i"><div class="spec-v">4</div><div class="spec-k">Beds</div></div>
+          <div class="spec-i"><div class="spec-v">3</div><div class="spec-k">Baths</div></div>
+          <div class="spec-i"><div class="spec-v">2,200</div><div class="spec-k">Sq Ft</div></div>
+          <div class="spec-i"><div class="spec-v">Yes</div><div class="spec-k">Park</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard" onclick="go('detail',1)">
+      <div class="pcard-img">
+        <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?w=720&q=85" alt="" loading="lazy"/>
+        <div class="pcard-overlay"></div>
+        <div class="pcard-badges"><span class="badge badge-s">For Sale</span></div>
+        <button class="pcard-heart">♡</button>
+        <div class="pcard-price"><div class="pcard-price-val">₹9.5 Cr</div></div>
+      </div>
+      <div class="pcard-body">
+        <div class="pcard-tag">Villa Sale</div>
+        <div class="pcard-title">Luxury Villa with Swimming Pool</div>
+        <div class="pcard-loc">📍 Kakkanad, Ernakulam, Kerala</div>
+        <div class="pcard-specs">
+          <div class="spec-i"><div class="spec-v">5</div><div class="spec-k">Beds</div></div>
+          <div class="spec-i"><div class="spec-v">4</div><div class="spec-k">Baths</div></div>
+          <div class="spec-i"><div class="spec-v">3,800</div><div class="spec-k">Sq Ft</div></div>
+          <div class="spec-i"><div class="spec-v">Pool</div><div class="spec-k">Amenity</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard" onclick="go('detail',4)">
+      <div class="pcard-img">
+        <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=720&q=85" alt="" loading="lazy"/>
+        <div class="pcard-overlay"></div>
+        <div class="pcard-badges"><span class="badge badge-r">For Rent</span></div>
+        <button class="pcard-heart">♡</button>
+        <div class="pcard-price"><div class="pcard-price-val">₹32,000<span style="font-size:13px;opacity:0.5">/mo</span></div></div>
+      </div>
+      <div class="pcard-body">
+        <div class="pcard-tag">Flat Rent</div>
+        <div class="pcard-title">3BHK Premium Apartment</div>
+        <div class="pcard-loc">📍 Marine Drive, Ernakulam, Kerala</div>
+        <div class="pcard-specs">
+          <div class="spec-i"><div class="spec-v">3</div><div class="spec-k">Beds</div></div>
+          <div class="spec-i"><div class="spec-v">2</div><div class="spec-k">Baths</div></div>
+          <div class="spec-i"><div class="spec-v">1,800</div><div class="spec-k">Sq Ft</div></div>
+          <div class="spec-i"><div class="spec-v">Gym</div><div class="spec-k">Amenity</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard" onclick="go('detail',2)">
+      <div class="pcard-img">
+        <img src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=720&q=85" alt="" loading="lazy"/>
+        <div class="pcard-overlay"></div>
+        <div class="pcard-badges"><span class="badge badge-s">For Sale</span><span class="badge badge-n">New</span></div>
+        <button class="pcard-heart">♡</button>
+        <div class="pcard-price"><div class="pcard-price-val">₹1.85 Cr</div></div>
+      </div>
+      <div class="pcard-body">
+        <div class="pcard-tag">Villa Sale</div>
+        <div class="pcard-title">Beachfront Villa, Cherai Beach</div>
+        <div class="pcard-loc">📍 Cherai Beach, Ernakulam, Kerala</div>
+        <div class="pcard-specs">
+          <div class="spec-i"><div class="spec-v">4</div><div class="spec-k">Beds</div></div>
+          <div class="spec-i"><div class="spec-v">3</div><div class="spec-k">Baths</div></div>
+          <div class="spec-i"><div class="spec-v">3,200</div><div class="spec-k">Sq Ft</div></div>
+          <div class="spec-i"><div class="spec-v">Sea</div><div class="spec-k">View</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard" onclick="go('detail',5)">
+      <div class="pcard-img">
+        <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=720&q=85" alt="" loading="lazy"/>
+        <div class="pcard-overlay"></div>
+        <div class="pcard-badges"><span class="badge badge-r">For Rent</span></div>
+        <button class="pcard-heart">♡</button>
+        <div class="pcard-price"><div class="pcard-price-val">₹18,000<span style="font-size:13px;opacity:0.5">/mo</span></div></div>
+      </div>
+      <div class="pcard-body">
+        <div class="pcard-tag">Flat Rent</div>
+        <div class="pcard-title">2BHK Sea View Apartment</div>
+        <div class="pcard-loc">📍 Beach Road, Kozhikode, Kerala</div>
+        <div class="pcard-specs">
+          <div class="spec-i"><div class="spec-v">2</div><div class="spec-k">Beds</div></div>
+          <div class="spec-i"><div class="spec-v">2</div><div class="spec-k">Baths</div></div>
+          <div class="spec-i"><div class="spec-v">1,200</div><div class="spec-k">Sq Ft</div></div>
+          <div class="spec-i"><div class="spec-v">Sea</div><div class="spec-k">View</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard" onclick="go('detail',3)">
+      <div class="pcard-img">
+        <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=720&q=85" alt="" loading="lazy"/>
+        <div class="pcard-overlay"></div>
+        <div class="pcard-badges"><span class="badge badge-s">For Sale</span></div>
+        <button class="pcard-heart">♡</button>
+        <div class="pcard-price"><div class="pcard-price-val">₹75 L</div></div>
+      </div>
+      <div class="pcard-body">
+        <div class="pcard-tag">House Sale</div>
+        <div class="pcard-title">Traditional Nalukettu Heritage Home</div>
+        <div class="pcard-loc">📍 Thrissur City, Thrissur, Kerala</div>
+        <div class="pcard-specs">
+          <div class="spec-i"><div class="spec-v">6</div><div class="spec-k">Beds</div></div>
+          <div class="spec-i"><div class="spec-v">4</div><div class="spec-k">Baths</div></div>
+          <div class="spec-i"><div class="spec-v">4,200</div><div class="spec-k">Sq Ft</div></div>
+          <div class="spec-i"><div class="spec-v">100yr</div><div class="spec-k">Heritage</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard" onclick="go('detail',6)">
+      <div class="pcard-img">
+        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=720&q=85" alt="" loading="lazy"/>
+        <div class="pcard-overlay"></div>
+        <div class="pcard-badges"><span class="badge badge-s">For Sale</span><span class="badge badge-n">New</span></div>
+        <button class="pcard-heart">♡</button>
+        <div class="pcard-price"><div class="pcard-price-val">₹42 L</div></div>
+      </div>
+      <div class="pcard-body">
+        <div class="pcard-tag">Plot Sale</div>
+        <div class="pcard-title">Residential Plot — DTCP Approved</div>
+        <div class="pcard-loc">📍 Palakkad Bypass, Palakkad, Kerala</div>
+        <div class="pcard-specs">
+          <div class="spec-i"><div class="spec-v">15</div><div class="spec-k">Cents</div></div>
+          <div class="spec-i"><div class="spec-v">North</div><div class="spec-k">Facing</div></div>
+          <div class="spec-i"><div class="spec-v">Road</div><div class="spec-k">Access</div></div>
+          <div class="spec-i"><div class="spec-v">DTCP</div><div class="spec-k">Approved</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard" onclick="go('detail',7)">
+      <div class="pcard-img">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=720&q=85" alt="" loading="lazy"/>
+        <div class="pcard-overlay"></div>
+        <div class="pcard-badges"><span class="badge badge-r">For Rent</span><span class="badge badge-n">New</span></div>
+        <button class="pcard-heart">♡</button>
+        <div class="pcard-price"><div class="pcard-price-val">₹20,000<span style="font-size:13px;opacity:0.5">/mo</span></div></div>
+      </div>
+      <div class="pcard-body">
+        <div class="pcard-tag">House Rent</div>
+        <div class="pcard-title">3BHK Near Guruvayur Temple</div>
+        <div class="pcard-loc">📍 Guruvayur, Thrissur, Kerala</div>
+        <div class="pcard-specs">
+          <div class="spec-i"><div class="spec-v">3</div><div class="spec-k">Beds</div></div>
+          <div class="spec-i"><div class="spec-v">2</div><div class="spec-k">Baths</div></div>
+          <div class="spec-i"><div class="spec-v">1,600</div><div class="spec-k">Sq Ft</div></div>
+          <div class="spec-i"><div class="spec-v">Temple</div><div class="spec-k">Nearby</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="height:24px;"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       DETAIL SCREEN
+  ═══════════════════════════════════════════════ -->
+  <div class="screen" id="s-detail">
+    <div id="det-inner"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       POST AD SCREEN
+  ═══════════════════════════════════════════════ -->
+  <div class="screen" id="s-post">
+    <div class="post-hdr">
+      <div class="post-row">
+        <button class="bk-btn" onclick="go('home')">←</button>
+        <div>
+          <div class="post-title">Post Your Property</div>
+          <div class="post-sub" id="steplbl">Step 1 of 4</div>
+        </div>
+      </div>
+      <div class="prog-row" id="progrow">
+        <div class="prog-seg" style="background:var(--gold);"></div>
+        <div class="prog-seg" style="background:var(--border);"></div>
+        <div class="prog-seg" style="background:var(--border);"></div>
+        <div class="prog-seg" style="background:var(--border);"></div>
+      </div>
+    </div>
+    <div class="fwrap" id="stepwrap"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       BROKERS SCREEN
+  ═══════════════════════════════════════════════ -->
+  <div class="screen" id="s-brokers">
+    <div class="broker-hdr">
+      <div style="font-size:9px;color:var(--gold);letter-spacing:2px;margin-bottom:5px;text-transform:uppercase;">Verified Experts</div>
+      <div style="font-family:var(--serif);font-size:24px;color:var(--text);">Our Brokers</div>
+      <div style="font-size:10px;color:var(--text-muted);margin-top:2px;">Kerala's finest property professionals</div>
+    </div>
+    <div style="height:18px;"></div>
+    <div class="brok-card">
+      <div class="brok-row">
+        <div class="brok-av">RM</div>
+        <div>
+          <div class="brok-nm">Rajesh Menon</div>
+          <div class="brok-role">Senior Property Broker</div>
+          <div class="brok-dist">📍 Thrissur</div>
+        </div>
+        <div class="brok-rating"><div class="brok-stars">4.9★</div><div class="brok-rl">142 reviews</div></div>
+      </div>
+      <div class="brok-stats">
+        <div class="brok-s"><div class="brok-sv">142</div><div class="brok-sk">Deals</div></div>
+        <div class="brok-s" style="border-left:1px solid var(--border);"><div class="brok-sv">12yr</div><div class="brok-sk">Experience</div></div>
+        <div class="brok-s" style="border-left:1px solid var(--border);"><div class="brok-sv">KL</div><div class="brok-sk">State</div></div>
+      </div>
+      <div class="brok-btns">
+        <button class="bb">📞 Call</button>
+        <button class="bbwa">💬 WhatsApp</button>
+        <button class="bbg">Listings</button>
+      </div>
+    </div>
+    <div class="brok-card">
+      <div class="brok-row">
+        <div class="brok-av">PK</div>
+        <div>
+          <div class="brok-nm">Priya Krishnan</div>
+          <div class="brok-role">Property Consultant</div>
+          <div class="brok-dist">📍 Ernakulam</div>
+        </div>
+        <div class="brok-rating"><div class="brok-stars">4.8★</div><div class="brok-rl">98 reviews</div></div>
+      </div>
+      <div class="brok-stats">
+        <div class="brok-s"><div class="brok-sv">98</div><div class="brok-sk">Deals</div></div>
+        <div class="brok-s" style="border-left:1px solid var(--border);"><div class="brok-sv">8yr</div><div class="brok-sk">Experience</div></div>
+        <div class="brok-s" style="border-left:1px solid var(--border);"><div class="brok-sv">KL</div><div class="brok-sk">State</div></div>
+      </div>
+      <div class="brok-btns">
+        <button class="bb">📞 Call</button>
+        <button class="bbwa">💬 WhatsApp</button>
+        <button class="bbg">Listings</button>
+      </div>
+    </div>
+    <div class="brok-card">
+      <div class="brok-row">
+        <div class="brok-av">AN</div>
+        <div>
+          <div class="brok-nm">Arun Nair</div>
+          <div class="brok-role">Land Specialist</div>
+          <div class="brok-dist">📍 Palakkad</div>
+        </div>
+        <div class="brok-rating"><div class="brok-stars">4.7★</div><div class="brok-rl">76 reviews</div></div>
+      </div>
+      <div class="brok-stats">
+        <div class="brok-s"><div class="brok-sv">76</div><div class="brok-sk">Deals</div></div>
+        <div class="brok-s" style="border-left:1px solid var(--border);"><div class="brok-sv">6yr</div><div class="brok-sk">Experience</div></div>
+        <div class="brok-s" style="border-left:1px solid var(--border);"><div class="brok-sv">KL</div><div class="brok-sk">State</div></div>
+      </div>
+      <div class="brok-btns">
+        <button class="bb">📞 Call</button>
+        <button class="bbwa">💬 WhatsApp</button>
+        <button class="bbg">Listings</button>
+      </div>
+    </div>
+    <div class="brok-card">
+      <div class="brok-row">
+        <div class="brok-av">SV</div>
+        <div>
+          <div class="brok-nm">Sunitha Varma</div>
+          <div class="brok-role">Luxury Specialist</div>
+          <div class="brok-dist">📍 Kozhikode</div>
+        </div>
+        <div class="brok-rating"><div class="brok-stars">5.0★</div><div class="brok-rl">54 reviews</div></div>
+      </div>
+      <div class="brok-stats">
+        <div class="brok-s"><div class="brok-sv">54</div><div class="brok-sk">Deals</div></div>
+        <div class="brok-s" style="border-left:1px solid var(--border);"><div class="brok-sv">5yr</div><div class="brok-sk">Experience</div></div>
+        <div class="brok-s" style="border-left:1px solid var(--border);"><div class="brok-sv">KL</div><div class="brok-sk">State</div></div>
+      </div>
+      <div class="brok-btns">
+        <button class="bb">📞 Call</button>
+        <button class="bbwa">💬 WhatsApp</button>
+        <button class="bbg">Listings</button>
+      </div>
+    </div>
+    <div style="height:24px;"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       SAVED SCREEN
+  ═══════════════════════════════════════════════ -->
+  <div class="screen" id="s-saved">
+    <div class="broker-hdr">
+      <div style="font-size:9px;color:var(--gold);letter-spacing:2px;margin-bottom:5px;text-transform:uppercase;">Collection</div>
+      <div style="font-family:var(--serif);font-size:24px;color:var(--text);">Saved Properties</div>
+      <div style="font-size:10px;color:var(--text-muted);margin-top:2px;">3 saved properties</div>
+    </div>
+    <div style="height:18px;"></div>
+    <div class="saved-item" onclick="go('detail',0)">
+      <div class="saved-thumb"><img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=200&q=75" alt="" loading="lazy"/></div>
+      <div class="saved-body">
+        <div class="saved-tag">House Rent</div>
+        <div class="saved-t">4BHK Independent House</div>
+        <div class="saved-l">📍 Pattom, Thiruvananthapuram</div>
+        <div class="saved-p">₹28,000/mo</div>
+      </div>
+    </div>
+    <div class="saved-item" onclick="go('detail',1)">
+      <div class="saved-thumb"><img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?w=200&q=75" alt="" loading="lazy"/></div>
+      <div class="saved-body">
+        <div class="saved-tag">Villa Sale</div>
+        <div class="saved-t">Luxury Villa with Pool</div>
+        <div class="saved-l">📍 Kakkanad, Ernakulam</div>
+        <div class="saved-p">₹9.5 Cr</div>
+      </div>
+    </div>
+    <div class="saved-item" onclick="go('detail',2)">
+      <div class="saved-thumb"><img src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=200&q=75" alt="" loading="lazy"/></div>
+      <div class="saved-body">
+        <div class="saved-tag">Villa Sale</div>
+        <div class="saved-t">Beachfront Villa, Cherai</div>
+        <div class="saved-l">📍 Cherai Beach, Ernakulam</div>
+        <div class="saved-p">₹1.85 Cr</div>
+      </div>
+    </div>
+    <div style="height:24px;"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       PROFILE SCREEN
+  ═══════════════════════════════════════════════ -->
+  <div class="screen" id="s-profile">
+    <div class="prof-hdr">
+      <div class="prof-av">B</div>
+      <div class="prof-nm">Broker Account</div>
+      <div class="prof-role">Kerala Properties Network</div>
+      <div class="prof-badge">✦ Verified Broker</div>
+    </div>
+    <div class="prof-stats">
+      <div class="prof-sb"><div class="prof-sv">12</div><div class="prof-sk">My Listings</div></div>
+      <div class="prof-sb"><div class="prof-sv">847</div><div class="prof-sk">Profile Views</div></div>
+      <div class="prof-sb"><div class="prof-sv">34</div><div class="prof-sk">Enquiries</div></div>
+    </div>
+    <div style="padding:0 20px 14px;display:flex;flex-direction:column;gap:10px;">
+      <button onclick="go('post')" style="padding:14px;border-radius:12px;border:none;background:linear-gradient(135deg,var(--gold),var(--gold-light));font-family:var(--sans);font-size:12px;font-weight:500;color:var(--obsidian);cursor:pointer;letter-spacing:0.5px;box-shadow:0 4px 16px rgba(201,168,76,0.3);">+ Post New Listing</button>
+      <button style="padding:14px;border-radius:12px;border:1px solid var(--border);background:transparent;font-family:var(--sans);font-size:12px;color:var(--text-dim);cursor:pointer;letter-spacing:0.5px;">My Active Listings</button>
+    </div>
+    <div class="prof-menu">
+      <div class="pm-item"><span class="pm-ic">📞</span><span class="pm-lb">Contact Support</span><span class="pm-ar">›</span></div>
+      <div class="pm-item"><span class="pm-ic">🔔</span><span class="pm-lb">Notifications</span><span class="pm-ar">›</span></div>
+      <div class="pm-item"><span class="pm-ic">📊</span><span class="pm-lb">My Analytics</span><span class="pm-ar">›</span></div>
+      <div class="pm-item"><span class="pm-ic">⭐</span><span class="pm-lb">Upgrade to Premium</span><span class="pm-ar">›</span></div>
+      <div class="pm-item"><span class="pm-ic">📜</span><span class="pm-lb">Terms & Conditions</span><span class="pm-ar">›</span></div>
+      <div class="pm-item"><span class="pm-ic">🚪</span><span class="pm-lb">Sign Out</span><span class="pm-ar">›</span></div>
+    </div>
+    <div style="text-align:center;padding:20px;font-size:9px;color:var(--text-muted);letter-spacing:1px;font-family:var(--serif);font-style:italic;">Kerala Homes · Luxury Real Estate · v2.1</div>
+    <div style="height:16px;"></div>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div class="bnav" id="bn">
+    <button class="bni on" id="bn-home" onclick="go('home')">
+      <div class="bni-ic">🏠</div><span class="bni-lb">Home</span>
+    </button>
+    <button class="bni" id="bn-saved" onclick="go('saved')">
+      <div class="bni-ic">♥</div><span class="bni-lb">Saved</span>
+    </button>
+    <button class="bn-center" onclick="go('post')">
+      <div class="bn-plus">+</div><span class="bn-center-lb">Post</span>
+    </button>
+    <button class="bni" id="bn-brokers" onclick="go('brokers')">
+      <div class="bni-ic">👤</div><span class="bni-lb">Brokers</span>
+    </button>
+    <button class="bni" id="bn-profile" onclick="go('profile')">
+      <div class="bni-ic">☰</div><span class="bni-lb">Profile</span>
+    </button>
+  </div>
+
+  <!-- CONTACT SHEET -->
+  <div class="sheet-overlay" id="csheet" onclick="hc()">
+    <div class="sheet" onclick="event.stopPropagation()">
+      <div class="sheet-pill"></div>
+      <div class="sheet-t">Contact Broker</div>
+      <div class="sheet-s">Our verified Kerala broker will reach you promptly</div>
+      <button class="sht-btn" onclick="hc()" style="background:var(--surface2);color:var(--text);border:1px solid var(--border);">📞 Call Now</button>
+      <button class="sht-btn" onclick="hc()" style="background:rgba(37,211,102,0.12);color:#25D366;border:1px solid rgba(37,211,102,0.3);">💬 WhatsApp</button>
+      <button class="sht-btn" onclick="hc()" style="background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--obsidian);">✉️ Send Enquiry</button>
+      <button class="sht-btn" onclick="hc()" style="background:transparent;color:var(--text-muted);border:1px solid var(--border);">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// Clock
+function tick(){var n=new Date();document.getElementById('clk').textContent=('0'+n.getHours()).slice(-2)+':'+('0'+n.getMinutes()).slice(-2);}
+tick();setInterval(tick,30000);
+
+// Detail data
+var DET=[
+  {img:'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=900&q=85',tag:'HOUSE RENT',typ:'rent',ti:'4BHK Independent House',lo:'Pattom, Thiruvananthapuram',pr:'₹28,000/mo',b:4,ba:3,sf:'2,200',am:'Covered Parking · 24/7 Water · Power Backup · Gated Compound'},
+  {img:'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=900&q=85',tag:'VILLA SALE',typ:'sale',ti:'Luxury Villa with Swimming Pool',lo:'Kakkanad, Ernakulam',pr:'₹9.5 Cr',b:5,ba:4,sf:'3,800',am:'Swimming Pool · Gym · Clubhouse · 3-Car Parking'},
+  {img:'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=900&q=85',tag:'VILLA SALE',typ:'sale',ti:'Beachfront Villa, Cherai Beach',lo:'Cherai Beach, Ernakulam',pr:'₹1.85 Cr',b:4,ba:3,sf:'3,200',am:'Sea View · Beach Access · Private Garden · Security'},
+  {img:'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=900&q=85',tag:'HOUSE SALE',typ:'sale',ti:'Traditional Nalukettu Heritage Home',lo:'Thrissur City, Thrissur',pr:'₹75 L',b:6,ba:4,sf:'4,200',am:'Heritage Structure · Central Courtyard · Teak Wood · 100yr Old'},
+  {img:'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=900&q=85',tag:'FLAT RENT',typ:'rent',ti:'3BHK Premium Apartment',lo:'Marine Drive, Ernakulam',pr:'₹32,000/mo',b:3,ba:2,sf:'1,800',am:'Gym · Pool · 24/7 Security · Lift · Parking'},
+  {img:'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=900&q=85',tag:'FLAT RENT',typ:'rent',ti:'2BHK Sea View Apartment',lo:'Beach Road, Kozhikode',pr:'₹18,000/mo',b:2,ba:2,sf:'1,200',am:'Sea View · Furnished · Balcony · Modular Kitchen'},
+  {img:'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=900&q=85',tag:'PLOT SALE',typ:'sale',ti:'Residential Plot — DTCP Approved',lo:'Palakkad Bypass, Palakkad',pr:'₹42 L',b:0,ba:0,sf:'',cents:'15 Cents',am:'DTCP Approved · North Facing · Road Access · Clear Title'},
+  {img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=85',tag:'HOUSE RENT',typ:'rent',ti:'3BHK Near Guruvayur Temple',lo:'Guruvayur, Thrissur',pr:'₹20,000/mo',b:3,ba:2,sf:'1,600',am:'Temple Walk · Parking · 24/7 Water · Independent'},
+];
+
+function renderDet(i){
+  var d=DET[i];var r=d.typ==='rent';
+  document.getElementById('det-inner').innerHTML=
+    '<div class="det-hero"><img src="'+d.img+'" alt="" loading="lazy"/><div class="det-hero-overlay"></div>'+
+    '<button class="det-back" onclick="go(\'home\')">←</button>'+
+    '<button class="det-share">⬆</button><button class="det-hrt">♡</button>'+
+    '<div class="det-pricebar">'+
+    '<div><div class="det-price">'+d.pr+'</div><div class="det-subloc">📍 '+d.lo+'</div></div>'+
+    '<span class="badge '+(r?'badge-r':'badge-s')+'">'+(r?'For Rent':'For Sale')+'</span>'+
+    '</div></div>'+
+    '<div class="det-body">'+
+    '<div class="det-tag">'+d.tag+'</div>'+
+    '<div class="det-title">'+d.ti+'</div>'+
+    '<div class="det-loc">📍 '+d.lo+', Kerala</div>'+
+    '<div class="spec-grid">'+
+    (d.b?'<div class="spec-box"><div class="spec-box-ic">🛏</div><div class="spec-box-v">'+d.b+'</div><div class="spec-box-k">Beds</div></div>':'')+
+    (d.ba?'<div class="spec-box"><div class="spec-box-ic">🚿</div><div class="spec-box-v">'+d.ba+'</div><div class="spec-box-k">Baths</div></div>':'')+
+    (d.sf?'<div class="spec-box"><div class="spec-box-ic">📐</div><div class="spec-box-v">'+d.sf+'</div><div class="spec-box-k">Sq Ft</div></div>':'')+
+    (d.cents?'<div class="spec-box"><div class="spec-box-ic">🌿</div><div class="spec-box-v">'+d.cents+'</div><div class="spec-box-k">Land</div></div>':'')+
+    '<div class="spec-box"><div class="spec-box-ic">🔑</div><div class="spec-box-v">Ready</div><div class="spec-box-k">Status</div></div>'+
+    '</div>'+
+    '<div class="info-panel"><div class="info-t">About This Property</div><div class="info-p">This '+d.tag.toLowerCase()+' is located in '+d.lo+', one of Kerala\'s most coveted addresses. '+(r?'Available immediately for rent with a clean rental agreement.':'Ready for registration with clear title documents.')+' Well-connected to key landmarks, schools, hospitals, and transport networks across the district.</div></div>'+
+    '<div class="info-panel"><div class="info-t">Amenities & Features</div><div class="amen-row">'+d.am.split(' · ').map(function(a){return'<span class="amen">'+a+'</span>';}).join('')+'</div></div>'+
+    '<div class="info-panel"><div class="info-t">Location</div><div class="map-ph" style="background:var(--surface2);border-radius:12px;height:100px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">'+
+    '<svg viewBox="0 0 340 100" style="position:absolute;inset:0;width:100%;height:100%;opacity:0.15"><defs><pattern id="mg" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M28 0L0 0 0 28" fill="none" stroke="#C9A84C" stroke-width="0.5"/></pattern></defs><rect width="340" height="100" fill="url(#mg)"/><circle cx="170" cy="50" r="14" fill="none" stroke="#C9A84C" stroke-width="1.5"/><circle cx="170" cy="50" r="5" fill="#C9A84C"/><circle cx="170" cy="50" r="24" fill="none" stroke="#C9A84C" stroke-width="0.5"/></svg>'+
+    '<div style="position:relative;z-index:1;text-align:center;font-family:var(--serif);font-size:12px;color:var(--text-dim);">📍 '+d.lo+'</div></div></div>'+
+    '</div>'+
+    '<div class="det-cta"><button class="cta-call">📞 Call</button><button class="cta-wa" onclick="sc()">💬 WhatsApp Broker</button></div>';
+}
+
+// Step content
+var SHTML=[
+'<div class="fst">Property Type</div><div class="fss">What are you listing today?</div><div class="tgrid"><div class="tcard on" onclick="selT(this)"><div class="tic">🏠</div><div class="tnm">For Rent</div><div class="tsub">Monthly rental</div></div><div class="tcard" onclick="selT(this)"><div class="tic">🏷</div><div class="tnm">For Sale</div><div class="tsub">Outright purchase</div></div></div><div class="flbl" style="margin-bottom:10px;">Property Category</div><div class="cat-row"><div class="ctile on" onclick="selC(this)"><div class="cic">🏠</div><div class="cnm">House</div></div><div class="ctile" onclick="selC(this)"><div class="cic">🏢</div><div class="cnm">Flat</div></div><div class="ctile" onclick="selC(this)"><div class="cic">🏛</div><div class="cnm">Villa</div></div><div class="ctile" onclick="selC(this)"><div class="cic">📐</div><div class="cnm">Plot</div></div></div><div class="fgrp"><div class="flbl">District in Kerala</div><select class="fsel"><option>Thrissur</option><option>Ernakulam</option><option>Thiruvananthapuram</option><option>Kozhikode</option><option>Palakkad</option><option>Malappuram</option><option>Kottayam</option><option>Kollam</option><option>Alappuzha</option><option>Idukki</option><option>Wayanad</option><option>Kannur</option><option>Kasaragod</option><option>Pathanamthitta</option></select></div>',
+'<div class="fst">Property Details</div><div class="fss">Tell buyers about your property</div><div class="fgrp"><div class="flbl">Listing Title</div><input class="finp" placeholder="e.g. 3BHK House near Thrissur Town"/></div><div class="fgrp"><div class="flbl">Exact Locality</div><input class="finp" placeholder="e.g. Swaraj Round, Kakkanad, Pattom…"/></div><div class="frow2"><div class="fgrp"><div class="flbl">Price (₹)</div><input class="finp" type="number" placeholder="25000"/></div><div class="fgrp"><div class="flbl">Sq Ft / Cents</div><input class="finp" type="number" placeholder="1800"/></div></div><div class="frow2"><div class="fgrp"><div class="flbl">Bedrooms</div><input class="finp" type="number" placeholder="3"/></div><div class="fgrp"><div class="flbl">Bathrooms</div><input class="finp" type="number" placeholder="2"/></div></div><div class="fgrp"><div class="flbl">Description</div><textarea class="fta" placeholder="Nearby landmarks, special features, commute info…"></textarea></div>',
+'<div class="fst">Add Photos</div><div class="fss">Properties with photos get 3× more enquiries</div><div class="pgrid"><div class="pmain"><div style="font-size:24px;color:var(--gold);">📷</div><div style="font-size:9px;font-weight:500;color:var(--gold);margin-top:5px;letter-spacing:0.8px;">MAIN PHOTO</div></div><div class="pslot"><span style="font-size:22px;opacity:0.2;color:var(--gold);">+</span></div><div class="pslot"><span style="font-size:22px;opacity:0.2;color:var(--gold);">+</span></div><div class="pslot"><span style="font-size:22px;opacity:0.2;color:var(--gold);">+</span></div><div class="pslot"><span style="font-size:22px;opacity:0.2;color:var(--gold);">+</span></div><div class="pslot"><span style="font-size:22px;opacity:0.2;color:var(--gold);">+</span></div></div><div class="tip amber"><span style="font-size:16px;">✦</span><div class="tipt" style="color:var(--gold-light);">Upload front view, living room, kitchen & bedrooms. <strong>JPG/PNG, max 5MB each.</strong> Up to 20 photos.</div></div>',
+'<div class="fst">Your Details</div><div class="fss">Buyers will contact you directly</div><div class="fgrp"><div class="flbl">Full Name</div><input class="finp" placeholder="Your full name"/></div><div class="fgrp"><div class="flbl">Mobile Number</div><input class="finp" type="tel" placeholder="+91 98XXX XXXXX"/></div><div class="pvc"><div class="pvl">Listing Preview</div><div class="pvt">Your Property Listing</div><div class="pvlc">📍 Kerala, India</div><div class="pvp">₹ —</div></div><div class="tip green"><span style="font-size:16px;">✓</span><div class="tipt" style="color:rgba(74,222,128,0.8);">Listing reviewed by our Kerala team and published within <strong>2 hours</strong>. WhatsApp confirmation sent to your number.</div></div>'
+];
+
+var step=1;
+function renderStep(n){
+  document.getElementById('steplbl').textContent='Step '+n+' of 4';
+  var segs=document.querySelectorAll('.prog-seg');
+  segs.forEach(function(s,i){s.style.background=i+1<=n?'var(--gold)':'var(--border)';});
+  var bk=n>1?'<button class="nbb" onclick="cs('+(n-1)+')">← Back</button>':'';
+  var nx=n<4?'<button class="nbn" onclick="cs('+(n+1)+')">Continue →</button>':'<button class="nbs" onclick="sub()">Submit Listing ✓</button>';
+  document.getElementById('stepwrap').innerHTML=SHTML[n-1]+'<div class="nav-btns">'+bk+nx+'</div>';
+}
+function cs(n){step=n;renderStep(n);}
+function sub(){alert('✦ Listing Submitted!\n\nOur Kerala team will review and publish your property within 2 hours.\nYou will receive a WhatsApp confirmation shortly.');go('home');}
+function selT(el){document.querySelectorAll('.tcard').forEach(function(c){c.classList.remove('on');c.querySelector('.tnm').style.color='';});el.classList.add('on');}
+function selC(el){document.querySelectorAll('.ctile').forEach(function(c){c.classList.remove('on');c.querySelector('.cnm').style.color='';});el.classList.add('on');}
+
+// Nav
+function go(scr,idx){
+  ['home','detail','post','brokers','saved','profile'].forEach(function(s){var el=document.getElementById('s-'+s);if(el){el.style.display='none';el.classList.remove('active');}});
+  var bn=document.getElementById('bn');
+  if(scr==='detail'){
+    var el=document.getElementById('s-detail');el.style.display='block';el.classList.add('active');
+    bn.style.display='none';el.scrollTop=0;renderDet(idx||0);
+  } else if(scr==='post'){
+    var el=document.getElementById('s-post');el.style.display='block';el.classList.add('active');
+    bn.style.display='none';step=1;renderStep(1);
+  } else {
+    var el=document.getElementById('s-'+scr)||document.getElementById('s-home');
+    el.style.display='block';el.classList.add('active');el.scrollTop=0;
+    bn.style.display='flex';
+    setNav('bn-'+scr);
+  }
+}
+function setNav(id){
+  ['bn-home','bn-saved','bn-brokers','bn-profile'].forEach(function(n){
+    var el=document.getElementById(n);if(!el)return;
+    if(el.id===id){el.classList.add('on');}else{el.classList.remove('on');}
+  });
+}
+function dchip(el){document.querySelectorAll('#dc .chip').forEach(function(c){c.classList.remove('on');});el.classList.add('on');}
+function tchip(el){document.querySelectorAll('#tc .chip').forEach(function(c){c.classList.remove('on');});el.classList.add('on');}
+function sc(){document.getElementById('csheet').style.display='flex';}
+function hc(){document.getElementById('csheet').style.display='none';}
+renderStep(1);
+</script>
+</body>
+</html>
