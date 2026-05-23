@@ -3,392 +3,362 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Kerala Homes — Luxury Real Estate</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Keralite Brokers — Premium Real Estate</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
 <style>
-:root {
-  --gold: #C9A84C;
-  --gold-light: #E8C97A;
-  --gold-dim: #8a6e30;
-  --obsidian: #0C0C0F;
-  --deep: #13131A;
-  --surface: #1A1A24;
-  --surface2: #22222F;
-  --surface3: #2A2A3A;
-  --text: #F0EDE8;
-  --text-dim: #9A9590;
-  --text-muted: #5A5650;
-  --border: rgba(201,168,76,0.15);
-  --border-hover: rgba(201,168,76,0.4);
-  --serif: 'Cormorant Garamond', serif;
-  --sans: 'DM Sans', sans-serif;
-  --glass: rgba(255,255,255,0.03);
-  --glow: 0 0 40px rgba(201,168,76,0.1);
-  --green: #4ADE80;
-  --red: #F87171;
+:root{
+  --gold:#C8A432;--gl:#E8C86A;--gd:#7A6420;--gg:rgba(200,164,50,0.12);
+  --teal:#0D6B5A;--tl:#14B8A6;
+  --bg:#07070F;--dp:#0C0C1A;--s1:#111122;--s2:#181830;--s3:#20203A;
+  --glass:rgba(255,255,255,0.04);--gb:rgba(255,255,255,0.09);
+  --tx:#EDE9E2;--td:#8A8578;--tm:#4A4840;
+  --green:#4ADE80;--red:#F87171;--blue:#60A5FA;
+  --serif:'Cormorant Garamond',serif;--sans:'DM Sans',sans-serif;
 }
-*{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--obsidian);color:var(--text);font-family:var(--sans);font-weight:300;display:flex;justify-content:center;align-items:flex-start;min-height:100vh;overflow-x:hidden;}
-::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--deep)}::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:2px}
-img{object-fit:cover;display:block;}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0A0A14;color:var(--tx);font-family:var(--sans);font-weight:300;display:flex;justify-content:center;align-items:flex-start;min-height:100vh;overflow-x:hidden;padding:40px 0 60px}
+img{object-fit:cover;display:block}
+::-webkit-scrollbar{width:2px}::-webkit-scrollbar-thumb{background:var(--gd);border-radius:2px}
 
-/* PHONE SHELL */
 .phone{
-  width:390px;min-height:844px;
-  background:var(--obsidian);
-  border-radius:46px;
-  overflow:hidden;
-  box-shadow:0 0 0 10px #1A1A1A, 0 0 0 11px #333, 0 40px 100px rgba(0,0,0,0.7), 0 0 60px rgba(201,168,76,0.06);
-  position:relative;
-  display:flex;flex-direction:column;
-  flex-shrink:0;
+  width:390px;min-height:844px;background:var(--bg);border-radius:50px;overflow:hidden;
+  position:relative;display:flex;flex-direction:column;flex-shrink:0;
+  box-shadow:0 0 0 8px #181818,0 0 0 9px #2A2A2A,0 60px 120px rgba(0,0,0,0.85),0 0 80px var(--gg);
 }
-/* Status bar */
-.statusbar{background:var(--deep);padding:12px 24px 6px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0;border-bottom:1px solid var(--border);}
-.sb-time{font-family:var(--sans);font-weight:500;font-size:13px;color:var(--text);}
-.sb-icons{font-size:12px;color:var(--text-dim);}
+.screen{flex:1;overflow-y:auto;overflow-x:hidden;display:none;position:relative}
+.screen.active{display:block}
 
-/* SCREENS */
-.screen{flex:1;overflow-y:auto;overflow-x:hidden;display:none;background:var(--obsidian);}
-.screen.active{display:block;}
-::-webkit-scrollbar{width:2px}
+/* STATUS BAR */
+.sb{background:rgba(7,7,15,0.9);padding:14px 26px 8px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0;backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.05);position:relative;z-index:10}
+.sb-t{font-weight:500;font-size:13px;letter-spacing:0.3px}
+.sb-i{font-size:11px;color:var(--td);letter-spacing:1px}
 
 /* BOTTOM NAV */
-.bnav{background:var(--deep);border-top:1px solid var(--border);display:flex;padding:8px 0 16px;flex-shrink:0;backdrop-filter:blur(20px);}
-.bni{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;border:none;background:transparent;padding:4px 0;}
-.bni-ic{font-size:18px;transition:all 0.25s;filter:grayscale(1);opacity:0.4;}
-.bni-lb{font-family:var(--sans);font-size:9px;font-weight:500;letter-spacing:0.5px;color:var(--text-muted);transition:all 0.25s;}
-.bni.on .bni-ic{filter:none;opacity:1;}
-.bni.on .bni-lb{color:var(--gold);}
-.bn-center{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;border:none;background:transparent;padding:4px 0;}
-.bn-plus{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-light));display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--obsidian);font-weight:900;margin-top:-18px;box-shadow:0 4px 20px rgba(201,168,76,0.4),0 0 0 2px var(--deep);}
-.bn-center-lb{font-size:9px;font-weight:500;color:var(--gold);letter-spacing:0.5px;}
+.bnav{background:rgba(7,7,15,0.97);backdrop-filter:blur(24px);border-top:1px solid rgba(255,255,255,0.07);display:flex;padding:10px 0 22px;flex-shrink:0;position:relative;z-index:10}
+.bni{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;border:none;background:transparent;padding:4px 0;transition:all 0.2s}
+.bni-ic{font-size:19px;opacity:0.25;transition:all 0.25s;filter:grayscale(1)}
+.bni-lb{font-size:9px;font-weight:500;letter-spacing:0.5px;color:var(--tm);transition:all 0.25s}
+.bni.on .bni-ic{opacity:1;filter:none}
+.bni.on .bni-lb{color:var(--gold)}
+.bn-c{flex:1;display:flex;flex-direction:column;align-items:center;cursor:pointer;border:none;background:transparent;padding:4px 0}
+.bn-plus{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gl));display:flex;align-items:center;justify-content:center;font-size:26px;color:var(--bg);font-weight:900;margin-top:-24px;box-shadow:0 4px 28px rgba(200,164,50,0.55),0 0 0 2px var(--dp),0 0 0 4px rgba(200,164,50,0.2)}
+.bn-cl{font-size:9px;color:var(--gold);letter-spacing:0.5px;margin-top:3px}
 
-/* ===== HOME SCREEN ===== */
-/* Hero header */
-.home-hdr{
-  background:linear-gradient(180deg, var(--deep) 0%, var(--obsidian) 100%);
-  padding:20px 20px 24px;
-  border-bottom:1px solid var(--border);
-  position:relative;
-  overflow:hidden;
-}
-.home-hdr::before{
-  content:'';position:absolute;top:-40px;right:-40px;width:180px;height:180px;
-  background:radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
-  pointer-events:none;
-}
-.hdr-row{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;}
-.hdr-brand{display:flex;flex-direction:column;}
-.hdr-loc{font-size:9px;color:var(--gold);letter-spacing:2px;font-weight:500;text-transform:uppercase;margin-bottom:4px;}
-.hdr-title{font-family:var(--serif);font-size:26px;font-weight:400;color:var(--text);letter-spacing:-0.3px;line-height:1.1;}
-.hdr-title em{color:var(--gold);font-style:italic;}
-.post-btn{
-  background:linear-gradient(135deg,var(--gold),var(--gold-light));
-  border:none;border-radius:10px;padding:9px 16px;
-  font-family:var(--sans);font-size:10px;font-weight:500;
-  color:var(--obsidian);cursor:pointer;letter-spacing:0.8px;text-transform:uppercase;
-  box-shadow:0 4px 16px rgba(201,168,76,0.35);
-  white-space:nowrap;
-}
-/* Search */
-.search-wrap{position:relative;}
-.search-icon{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--gold);font-size:13px;}
-.search-input{
-  width:100%;padding:12px 14px 12px 38px;
-  background:var(--surface);border:1px solid var(--border);border-radius:12px;
-  font-family:var(--sans);font-size:12px;font-weight:400;color:var(--text);
-  outline:none;box-sizing:border-box;
-  transition:border-color 0.2s;
-}
-.search-input::placeholder{color:var(--text-muted);}
-.search-input:focus{border-color:var(--gold-dim);}
+/* ══════════════════════ HOME ══════════════════════ */
+.home-hero{position:relative;padding:0 20px 24px;background:linear-gradient(180deg,var(--dp) 0%,rgba(7,7,15,0) 100%);overflow:hidden}
+.hero-orb1{position:absolute;top:-60px;left:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(200,164,50,0.08) 0%,transparent 70%);pointer-events:none}
+.hero-orb2{position:absolute;bottom:-40px;right:-40px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(13,107,90,0.07) 0%,transparent 70%);pointer-events:none}
+.h-toprow{display:flex;align-items:center;justify-content:space-between;padding-top:6px;margin-bottom:22px;position:relative;z-index:2}
+.h-loc{display:flex;align-items:center;gap:7px;cursor:pointer}
+.h-loc-dot{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold),0 0 20px rgba(200,164,50,0.4)}
+.h-loc-txt{font-size:11px;font-weight:500;color:var(--td);letter-spacing:0.8px}
+.h-loc-arr{color:var(--gold);font-size:10px;opacity:0.7}
+.h-acts{display:flex;gap:8px;align-items:center}
+.h-bell{width:36px;height:36px;border-radius:12px;background:var(--glass);border:1px solid var(--gb);display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;position:relative}
+.h-bell-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);border:2px solid var(--dp);position:absolute;top:5px;right:5px}
+.h-av{width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,var(--gd),var(--gold));display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:16px;font-weight:600;color:var(--bg);cursor:pointer}
+.h-eye{position:relative;z-index:2;font-size:9px;color:var(--tl);letter-spacing:2px;text-transform:uppercase;margin-bottom:7px;display:flex;align-items:center;gap:6px}
+.h-eye::before{content:'';width:20px;height:1px;background:var(--tl);opacity:0.5}
+.h-tagline{position:relative;z-index:2;font-family:var(--serif);font-size:32px;font-weight:300;line-height:1.05;margin-bottom:4px;letter-spacing:-0.8px}
+.h-tagline em{font-style:italic;color:var(--gold)}
+.h-sub{position:relative;z-index:2;font-size:10px;color:var(--td);margin-bottom:22px;letter-spacing:0.3px}
+.search-box{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.05);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:13px 16px;position:relative;z-index:2;transition:border-color 0.25s}
+.search-box:focus-within{border-color:rgba(200,164,50,0.45);box-shadow:0 0 0 3px rgba(200,164,50,0.06)}
+.s-ic{font-size:15px;color:var(--gold);flex-shrink:0}
+.s-inp{flex:1;background:transparent;border:none;outline:none;font-family:var(--sans);font-size:12px;color:var(--tx)}
+.s-inp::placeholder{color:var(--tm)}
+.s-btn{background:linear-gradient(135deg,var(--gold),var(--gl));border:none;border-radius:11px;padding:8px 16px;font-size:10px;font-weight:600;color:var(--bg);cursor:pointer;letter-spacing:0.5px;white-space:nowrap;box-shadow:0 2px 14px rgba(200,164,50,0.4)}
 
-/* Filter chips */
-.chips-row{overflow-x:auto;display:flex;gap:8px;padding:14px 20px 6px;scrollbar-width:none;}
-.chips-row::-webkit-scrollbar{display:none;}
-.chip{
-  padding:6px 14px;border-radius:20px;border:1px solid var(--border);
-  font-family:var(--sans);font-size:11px;font-weight:400;cursor:pointer;
-  white-space:nowrap;flex-shrink:0;
-  background:transparent;color:var(--text-dim);
-  transition:all 0.2s;
+.chips{overflow-x:auto;display:flex;gap:7px;padding:14px 20px 0;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{padding:7px 15px;border-radius:20px;border:1px solid rgba(255,255,255,0.08);background:transparent;color:var(--td);font-family:var(--sans);font-size:11px;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:all 0.2s}
+.chip.on{background:rgba(200,164,50,0.1);border-color:rgba(200,164,50,0.4);color:var(--gold)}
+.chip:hover{border-color:rgba(255,255,255,0.2)}
+.chip-sep{width:1px;background:rgba(255,255,255,0.08);margin:0 2px;display:block;height:22px;align-self:center;flex-shrink:0}
+
+.auric-line{height:1px;margin:16px 20px 0;background:linear-gradient(90deg,transparent,rgba(200,164,50,0.15),rgba(200,164,50,0.5),rgba(200,164,50,0.15),transparent)}
+
+.sect{padding:20px 20px 0}
+.sect-hdr{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px}
+.sect-t{font-family:var(--serif);font-size:22px;font-weight:400;letter-spacing:-0.3px}
+.sect-t em{color:var(--gold);font-style:italic}
+.sect-link{font-size:10px;color:var(--gold);letter-spacing:1px;text-transform:uppercase;cursor:pointer;opacity:0.8}
+
+/* ROTATING HERO BANNER */
+.hero-banner{
+  margin:0 20px;border-radius:24px;overflow:hidden;cursor:pointer;
+  position:relative;height:220px;background:var(--s1);
+  border:1px solid rgba(255,255,255,0.07);
+  box-shadow:0 12px 48px rgba(0,0,0,0.4);
 }
-.chip.on{background:rgba(201,168,76,0.12);border-color:var(--gold-dim);color:var(--gold);}
-.chip:hover{border-color:var(--gold-dim);color:var(--text);}
+.hb-img{width:100%;height:100%;object-fit:cover;transition:opacity 0.7s ease,transform 8s linear}
+.hb-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,7,15,0.05) 0%,rgba(7,7,15,0.88) 100%)}
+.hb-top{position:absolute;top:14px;left:14px;right:14px;display:flex;justify-content:space-between;align-items:flex-start}
+.hb-heart{width:32px;height:32px;border-radius:50%;background:rgba(7,7,15,0.6);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.12);color:var(--td);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s}
+.hb-bottom{position:absolute;bottom:0;left:0;right:0;padding:16px 18px}
+.hb-price{font-family:var(--serif);font-size:26px;font-weight:400;color:var(--tx);letter-spacing:-0.5px;line-height:1}
+.hb-name{font-family:var(--serif);font-size:14px;color:rgba(237,233,226,0.75);margin-top:3px}
+.hb-loc{font-size:10px;color:rgba(237,233,226,0.45);margin-top:2px}
+.hb-dots{display:flex;gap:5px;margin-top:10px}
+.hb-dot{width:18px;height:3px;border-radius:2px;background:rgba(255,255,255,0.25);transition:all 0.4s;cursor:pointer}
+.hb-dot.on{background:var(--gold);width:28px}
+.hb-view{position:absolute;bottom:20px;right:16px;background:rgba(200,164,50,0.15);backdrop-filter:blur(8px);border:1px solid rgba(200,164,50,0.35);border-radius:8px;padding:6px 12px;font-size:9px;color:var(--gold);letter-spacing:1px;text-transform:uppercase;font-weight:500}
 
-/* Gold divider */
-.gold-div{height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);margin:2px 20px;}
+/* FEATURED REEL */
+.feat-reel{overflow-x:auto;display:flex;gap:13px;padding:0 20px 4px;scrollbar-width:none}
+.feat-reel::-webkit-scrollbar{display:none}
+.fc{min-width:200px;border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,0.07);cursor:pointer;flex-shrink:0;background:var(--s1);transition:transform 0.3s,box-shadow 0.3s}
+.fc:hover{transform:translateY(-5px);box-shadow:0 16px 48px rgba(0,0,0,0.5),0 0 0 1px rgba(200,164,50,0.3)}
+.fc:hover .fc-img img{transform:scale(1.07)}
+.fc-img{height:130px;position:relative;overflow:hidden}
+.fc-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s}
+.fc-ov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,7,15,0) 30%,rgba(7,7,15,0.8) 100%)}
+.fc-price{position:absolute;bottom:10px;left:11px;font-family:var(--serif);font-size:18px;color:var(--tx);letter-spacing:-0.3px}
+.fc-hrt{position:absolute;top:9px;right:9px;width:28px;height:28px;border-radius:50%;background:rgba(7,7,15,0.6);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.1);color:var(--td);font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.fc-badge{position:absolute;top:9px;left:9px}
+.fc-body{padding:10px 12px 13px}
+.fc-name{font-family:var(--serif);font-size:13px;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px}
+.fc-loc{font-size:9px;color:var(--tm)}
 
-/* Section titles */
-.sect{padding:18px 20px 6px;}
-.sect-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
-.sect-t{font-family:var(--serif);font-size:20px;font-weight:400;color:var(--text);letter-spacing:-0.2px;}
-.sect-s{font-size:10px;color:var(--gold);font-weight:400;letter-spacing:1px;text-transform:uppercase;cursor:pointer;}
+/* STATS */
+.stats-wrap{margin:18px 20px 0;padding:18px 20px;background:var(--s1);border:1px solid rgba(255,255,255,0.06);border-radius:20px;display:flex;justify-content:space-around;position:relative;overflow:hidden}
+.stats-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.stat-v{font-family:var(--serif);font-size:24px;font-weight:600;color:var(--gold);text-align:center}
+.stat-l{font-size:8px;color:var(--tm);letter-spacing:1px;text-align:center;margin-top:3px;text-transform:uppercase}
+.stat-d{width:1px;background:rgba(255,255,255,0.06)}
 
-/* Featured carousel */
-.feat-scroll{overflow-x:auto;display:flex;gap:14px;padding:0 20px 6px;scrollbar-width:none;}
-.feat-scroll::-webkit-scrollbar{display:none;}
-.fcard{
-  min-width:230px;border-radius:18px;overflow:hidden;cursor:pointer;flex-shrink:0;
-  border:1px solid var(--border);
-  transition:transform 0.25s, box-shadow 0.25s;
-  position:relative;
-}
-.fcard:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.4),0 0 0 1px var(--gold-dim);}
-.fcard-img{height:140px;position:relative;overflow:hidden;}
-.fcard-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s;}
-.fcard:hover .fcard-img img{transform:scale(1.05);}
-.fcard-img-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,12,15,0.1) 0%,rgba(12,12,15,0.7) 100%);}
-.fcard-badge{position:absolute;top:10px;left:10px;display:flex;gap:5px;}
-.fcard-price{position:absolute;bottom:10px;left:12px;font-family:var(--serif);font-size:19px;font-weight:400;color:var(--text);letter-spacing:-0.3px;}
-.fcard-heart{position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:50%;background:rgba(12,12,15,0.5);border:1px solid var(--border);color:var(--text-dim);font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);}
-.badge{font-size:8px;font-weight:500;letter-spacing:0.8px;padding:3px 8px;border-radius:4px;text-transform:uppercase;}
-.badge-r{background:rgba(74,222,128,0.15);color:var(--green);border:1px solid rgba(74,222,128,0.3);}
-.badge-s{background:rgba(201,168,76,0.15);color:var(--gold);border:1px solid rgba(201,168,76,0.3);}
-.badge-n{background:rgba(96,165,250,0.15);color:#60A5FA;border:1px solid rgba(96,165,250,0.3);}
-.fcard-body{background:var(--surface);padding:10px 14px 13px;}
-.fname{font-family:var(--serif);font-size:14px;font-weight:400;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px;}
-.floc{font-size:9px;color:var(--text-muted);letter-spacing:0.3px;}
+/* PROPERTY CARDS */
+.pcard{background:var(--s1);border:1px solid rgba(255,255,255,0.07);border-radius:22px;overflow:hidden;margin:0 20px 18px;cursor:pointer;transition:transform 0.3s,box-shadow 0.3s,border-color 0.3s}
+.pcard:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,0.5),0 0 0 1px rgba(200,164,50,0.3)}
+.pcard:hover .pc-img img{transform:scale(1.05)}
+.pc-img{height:200px;position:relative;overflow:hidden}
+.pc-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s}
+.pc-ov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,7,15,0.04) 0%,rgba(7,7,15,0.72) 100%)}
+.pc-top{position:absolute;top:13px;left:13px;right:13px;display:flex;justify-content:space-between;align-items:flex-start}
+.pc-hrt{width:34px;height:34px;border-radius:50%;background:rgba(7,7,15,0.55);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);color:var(--td);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s}
+.pc-hrt:hover,.pc-hrt.loved{color:#F87171;border-color:rgba(248,113,113,0.4)}
+.pc-price{position:absolute;bottom:14px;left:14px}
+.pc-pv{font-family:var(--serif);font-size:24px;font-weight:400;color:var(--tx);letter-spacing:-0.5px}
+.pc-body{padding:14px 16px 16px}
+.pc-lbl{font-size:9px;color:var(--gold);letter-spacing:1.8px;text-transform:uppercase;margin-bottom:6px}
+.pc-title{font-family:var(--serif);font-size:19px;font-weight:400;color:var(--tx);margin-bottom:3px;line-height:1.2}
+.pc-tagline{font-family:var(--serif);font-size:11px;font-style:italic;color:var(--td);margin-bottom:5px}
+.pc-loc{font-size:10px;color:var(--tm);margin-bottom:13px}
+.pc-specs{display:flex;border-top:1px solid rgba(255,255,255,0.06);padding-top:12px}
+.ps-i{flex:1;text-align:center}
+.ps-i+.ps-i{border-left:1px solid rgba(255,255,255,0.06)}
+.ps-v{font-family:var(--serif);font-size:16px;font-weight:600;color:var(--gold)}
+.ps-k{font-size:8px;color:var(--tm);letter-spacing:0.5px;text-transform:uppercase;margin-top:2px}
 
-/* Stats bar */
-.stats{
-  margin:4px 20px 14px;padding:14px 20px;
-  background:var(--surface);border:1px solid var(--border);border-radius:14px;
-  display:flex;justify-content:space-around;
-  position:relative;overflow:hidden;
-}
-.stats::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);}
-.sv{font-family:var(--serif);font-size:18px;font-weight:600;color:var(--gold);text-align:center;}
-.sl{font-size:8px;color:var(--text-muted);letter-spacing:0.8px;text-align:center;margin-top:2px;text-transform:uppercase;}
-.st-div{width:1px;background:var(--border);}
+/* BADGE */
+.badge{font-size:8px;font-weight:500;letter-spacing:0.8px;padding:4px 9px;border-radius:5px;text-transform:uppercase;backdrop-filter:blur(6px)}
+.b-r{background:rgba(74,222,128,0.14);color:#4ADE80;border:1px solid rgba(74,222,128,0.3)}
+.b-s{background:rgba(200,164,50,0.14);color:var(--gold);border:1px solid rgba(200,164,50,0.3)}
+.b-n{background:rgba(96,165,250,0.14);color:#60A5FA;border:1px solid rgba(96,165,250,0.3)}
+.b-v{background:rgba(13,107,90,0.18);color:#14B8A6;border:1px solid rgba(13,107,90,0.4)}
 
-/* Property cards */
-.pcard{
-  background:var(--surface);border:1px solid var(--border);border-radius:18px;
-  overflow:hidden;margin:0 20px 16px;cursor:pointer;
-  transition:transform 0.25s, box-shadow 0.25s,border-color 0.25s;
-}
-.pcard:hover{transform:translateY(-3px);box-shadow:var(--glow);border-color:var(--gold-dim);}
-.pcard-img{height:185px;position:relative;overflow:hidden;}
-.pcard-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s;}
-.pcard:hover .pcard-img img{transform:scale(1.04);}
-.pcard-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,12,15,0.08) 0%,rgba(12,12,15,0.65) 100%);}
-.pcard-badges{position:absolute;top:12px;left:12px;display:flex;gap:6px;}
-.pcard-heart{position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:50%;background:rgba(12,12,15,0.5);border:1px solid var(--border);color:var(--text-dim);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);transition:all 0.2s;}
-.pcard-heart:hover{border-color:var(--gold-dim);color:var(--gold);}
-.pcard-price{position:absolute;bottom:14px;left:14px;}
-.pcard-price-val{font-family:var(--serif);font-size:22px;font-weight:400;color:var(--text);letter-spacing:-0.5px;}
-.pcard-body{padding:13px 15px 15px;}
-.pcard-tag{font-size:9px;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:5px;}
-.pcard-title{font-family:var(--serif);font-size:17px;font-weight:400;color:var(--text);margin-bottom:4px;line-height:1.3;}
-.pcard-loc{font-size:10px;color:var(--text-dim);margin-bottom:12px;display:flex;align-items:center;gap:4px;}
-.pcard-specs{display:flex;border-top:1px solid var(--border);padding-top:11px;gap:0;}
-.spec-i{flex:1;text-align:center;}
-.spec-i+.spec-i{border-left:1px solid var(--border);}
-.spec-v{font-family:var(--serif);font-size:15px;font-weight:600;color:var(--gold);}
-.spec-k{font-size:8px;color:var(--text-muted);letter-spacing:0.5px;text-transform:uppercase;margin-top:1px;}
+/* ══════════════════════ DETAIL ══════════════════════ */
+.det-hero{height:300px;position:relative;overflow:hidden}
+.det-hero img{width:100%;height:100%;object-fit:cover}
+.det-ov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,7,15,0.2) 0%,rgba(7,7,15,0.85) 100%)}
+.det-back{position:absolute;top:16px;left:16px;width:40px;height:40px;border-radius:50%;background:rgba(7,7,15,0.65);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,0.12);color:var(--tx);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.det-share{position:absolute;top:16px;right:58px;width:40px;height:40px;border-radius:50%;background:rgba(7,7,15,0.65);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,0.12);color:var(--td);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.det-fav{position:absolute;top:16px;right:12px;width:40px;height:40px;border-radius:50%;background:rgba(7,7,15,0.65);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,0.12);color:var(--td);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.det-btm{position:absolute;bottom:0;left:0;right:0;padding:18px 18px 16px;display:flex;justify-content:space-between;align-items:flex-end}
+.det-price{font-family:var(--serif);font-size:30px;font-weight:400;color:var(--tx);letter-spacing:-0.8px}
+.det-sub{font-size:10px;color:rgba(237,233,226,0.45);margin-top:3px}
+.det-body{padding:22px 18px 110px}
+.det-lbl{font-size:9px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.det-title{font-family:var(--serif);font-size:27px;font-weight:400;line-height:1.15;margin-bottom:5px;letter-spacing:-0.4px}
+.det-tagline{font-family:var(--serif);font-size:13px;font-style:italic;color:var(--td);margin-bottom:6px}
+.det-loc{font-size:11px;color:var(--td);margin-bottom:22px}
+.spec-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:20px}
+.sg-box{background:var(--s2);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:13px 6px;text-align:center;position:relative;overflow:hidden}
+.sg-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(200,164,50,0.5),transparent)}
+.sg-ic{font-size:18px;margin-bottom:5px}
+.sg-v{font-family:var(--serif);font-size:15px;font-weight:600;color:var(--gold)}
+.sg-k{font-size:8px;color:var(--tm);text-transform:uppercase;letter-spacing:0.4px}
+.info-box{background:var(--s1);border:1px solid rgba(255,255,255,0.07);border-radius:18px;padding:17px;margin-bottom:12px;position:relative;overflow:hidden}
+.info-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gd),rgba(200,164,50,0.5),var(--gd),transparent)}
+.ib-t{font-family:var(--serif);font-size:16px;color:var(--tx);margin-bottom:10px}
+.ib-p{font-size:11px;color:var(--td);line-height:1.95}
+.amen-wrap{display:flex;flex-wrap:wrap;gap:7px}
+.amen{background:var(--s2);border:1px solid rgba(255,255,255,0.07);border-radius:6px;padding:5px 12px;font-size:10px;color:var(--td)}
+.broker-prev{background:var(--s2);border:1px solid rgba(255,255,255,0.07);border-radius:18px;padding:16px;margin-bottom:12px;display:flex;align-items:center;gap:14px;position:relative;overflow:hidden}
+.broker-prev::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(200,164,50,0.4),transparent)}
+.bp-av{width:50px;height:50px;border-radius:14px;background:rgba(200,164,50,0.08);border:1px solid rgba(200,164,50,0.3);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:19px;color:var(--gold);flex-shrink:0}
+.bp-nm{font-family:var(--serif);font-size:15px;color:var(--tx);margin-bottom:2px}
+.bp-role{font-size:9px;color:var(--tm);margin-bottom:3px}
+.bp-resp{font-size:9px;color:var(--tl)}
+.bp-stars{margin-left:auto;text-align:right}
+.bp-star-v{font-size:14px;color:var(--gold)}
+.bp-rl{font-size:8px;color:var(--tm);margin-top:2px}
+.map-box{background:var(--s2);border-radius:14px;height:110px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.06)}
+.det-cta{position:sticky;bottom:0;background:rgba(7,7,15,0.97);backdrop-filter:blur(24px);border-top:1px solid rgba(255,255,255,0.08);padding:14px 18px 20px;display:flex;gap:10px}
+.cta-call{flex:1;padding:14px;border-radius:13px;border:1px solid rgba(255,255,255,0.1);background:transparent;font-family:var(--sans);font-size:11px;font-weight:500;color:var(--tx);cursor:pointer;letter-spacing:0.5px;transition:all 0.2s}
+.cta-call:hover{border-color:rgba(200,164,50,0.4)}
+.cta-wa{flex:2;padding:14px;border-radius:13px;border:none;background:linear-gradient(135deg,var(--gold),var(--gl));font-family:var(--sans);font-size:11px;font-weight:600;color:var(--bg);cursor:pointer;letter-spacing:0.5px;box-shadow:0 4px 22px rgba(200,164,50,0.45)}
 
-/* ===== DETAIL SCREEN ===== */
-.det-hero{height:280px;position:relative;overflow:hidden;}
-.det-hero img{width:100%;height:100%;object-fit:cover;}
-.det-hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,12,15,0.3) 0%,rgba(12,12,15,0.75) 100%);}
-.det-back{position:absolute;top:14px;left:14px;width:38px;height:38px;border-radius:50%;background:rgba(12,12,15,0.6);border:1px solid var(--border);color:var(--text);font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);transition:all 0.2s;}
-.det-back:hover{border-color:var(--gold-dim);}
-.det-share{position:absolute;top:14px;right:52px;width:38px;height:38px;border-radius:50%;background:rgba(12,12,15,0.6);border:1px solid var(--border);color:var(--text-dim);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);}
-.det-heart{position:absolute;top:14px;right:10px;width:38px;height:38px;border-radius:50%;background:rgba(12,12,15,0.6);border:1px solid var(--border);color:var(--text-dim);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);}
-.det-pricebar{position:absolute;bottom:16px;left:16px;right:16px;display:flex;justify-content:space-between;align-items:flex-end;}
-.det-price{font-family:var(--serif);font-size:26px;font-weight:400;color:var(--text);letter-spacing:-0.5px;}
-.det-subloc{font-size:10px;color:rgba(240,237,232,0.5);margin-top:2px;}
-.det-body{padding:20px 18px 100px;}
-.det-tag{font-size:9px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;}
-.det-title{font-family:var(--serif);font-size:24px;font-weight:400;color:var(--text);margin-bottom:6px;line-height:1.2;}
-.det-loc{font-size:11px;color:var(--text-dim);margin-bottom:18px;}
-.spec-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:18px;}
-.spec-box{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:11px 6px;text-align:center;}
-.spec-box-ic{font-size:18px;margin-bottom:4px;}
-.spec-box-v{font-family:var(--serif);font-size:14px;font-weight:600;color:var(--gold);}
-.spec-box-k{font-size:8px;color:var(--text-muted);letter-spacing:0.4px;text-transform:uppercase;}
-.info-panel{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:15px;margin-bottom:12px;position:relative;overflow:hidden;}
-.info-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);}
-.info-t{font-family:var(--serif);font-size:15px;font-weight:400;color:var(--text);margin-bottom:8px;}
-.info-p{font-size:11px;color:var(--text-dim);line-height:1.9;}
-.amen-row{display:flex;flex-wrap:wrap;gap:7px;}
-.amen{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:5px 10px;font-size:10px;color:var(--text-dim);letter-spacing:0.3px;}
-.map-ph{background:var(--surface2);border-radius:12px;height:100px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
-.det-cta{position:sticky;bottom:0;background:var(--deep);border-top:1px solid var(--border);padding:14px 18px 18px;display:flex;gap:10px;}
-.cta-call{flex:1;padding:13px;border-radius:11px;border:1px solid var(--border);background:transparent;font-family:var(--sans);font-size:11px;font-weight:500;color:var(--text);cursor:pointer;letter-spacing:0.5px;transition:all 0.2s;}
-.cta-call:hover{border-color:var(--gold-dim);}
-.cta-wa{flex:2;padding:13px;border-radius:11px;border:none;background:linear-gradient(135deg,var(--gold),var(--gold-light));font-family:var(--sans);font-size:11px;font-weight:500;color:var(--obsidian);cursor:pointer;letter-spacing:0.5px;box-shadow:0 4px 16px rgba(201,168,76,0.35);transition:all 0.2s;}
-.cta-wa:hover{box-shadow:0 6px 24px rgba(201,168,76,0.5);}
+/* ══════════════════════ POST ══════════════════════ */
+.post-hdr{background:var(--dp);padding:18px 20px 22px;border-bottom:1px solid rgba(255,255,255,0.07)}
+.post-row{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.bk-btn{width:36px;height:36px;border-radius:50%;background:var(--glass);border:1px solid var(--gb);color:var(--td);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s}
+.bk-btn:hover{border-color:rgba(200,164,50,0.4);color:var(--gold)}
+.prog-row{display:flex;gap:6px}
+.prog-s{height:3px;flex:1;border-radius:2px;transition:all 0.4s}
+.fwrap{padding:22px 18px}
+.fst{font-family:var(--serif);font-size:22px;color:var(--tx);margin-bottom:5px}
+.fss{font-size:11px;color:var(--tm);margin-bottom:22px}
+.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.tcard{padding:20px 14px;border-radius:16px;border:1px solid rgba(255,255,255,0.07);background:var(--s1);cursor:pointer;text-align:center;transition:all 0.25s}
+.tcard.on{border-color:rgba(200,164,50,0.45);background:rgba(200,164,50,0.07);box-shadow:0 0 28px rgba(200,164,50,0.1)}
+.tcard.on .tnm{color:var(--gold)}
+.tic{font-size:30px;margin-bottom:8px}
+.tnm{font-family:var(--serif);font-size:16px;color:var(--td);transition:color 0.2s}
+.tsub{font-size:9px;color:var(--tm);margin-top:3px}
+.cat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:20px}
+.ctile{padding:12px 5px;border-radius:13px;border:1px solid rgba(255,255,255,0.07);background:var(--s1);cursor:pointer;text-align:center;transition:all 0.25s}
+.ctile.on{border-color:rgba(200,164,50,0.45);background:rgba(200,164,50,0.07)}
+.ctile.on .cnm{color:var(--gold)}
+.cic{font-size:22px}
+.cnm{font-size:9px;color:var(--tm);margin-top:5px;transition:color 0.2s}
+.flbl{font-size:9px;font-weight:600;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:7px}
+.finp{width:100%;padding:13px 15px;border-radius:12px;border:1px solid rgba(255,255,255,0.08);background:var(--s1);font-family:var(--sans);font-size:12px;color:var(--tx);outline:none;box-sizing:border-box;transition:border-color 0.2s}
+.finp:focus{border-color:rgba(200,164,50,0.45)}
+.finp::placeholder{color:var(--tm)}
+.fsel{width:100%;padding:13px 15px;border-radius:12px;border:1px solid rgba(255,255,255,0.08);background:var(--s1);font-family:var(--sans);font-size:12px;color:var(--tx);outline:none;appearance:none;box-sizing:border-box}
+.fsel option{background:var(--s2)}
+.fta{width:100%;padding:13px 15px;border-radius:12px;border:1px solid rgba(255,255,255,0.08);background:var(--s1);font-family:var(--sans);font-size:11px;color:var(--tx);outline:none;resize:vertical;min-height:80px;box-sizing:border-box}
+.fta::placeholder{color:var(--tm)}
+.frow2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fgrp{margin-bottom:15px}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:18px}
+.pmain{aspect-ratio:1;border-radius:14px;background:var(--s2);border:1px dashed rgba(200,164,50,0.4);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s}
+.pslot{aspect-ratio:1;border-radius:14px;border:1px dashed rgba(255,255,255,0.1);background:var(--s1);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.pslot:hover{border-color:rgba(200,164,50,0.35)}
+.tip{border-radius:14px;padding:14px;display:flex;gap:10px;align-items:flex-start;margin-bottom:14px}
+.tip.amber{background:rgba(200,164,50,0.06);border:1px solid rgba(200,164,50,0.2)}
+.tip.teal{background:rgba(13,107,90,0.07);border:1px solid rgba(13,107,90,0.25)}
+.tipt{font-size:10px;line-height:1.8}
+.pvc{background:var(--s1);border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:16px;margin-bottom:14px;position:relative;overflow:hidden}
+.pvc::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gd),transparent)}
+.pvl{font-size:8px;font-weight:600;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:9px}
+.pvt{font-family:var(--serif);font-size:16px;color:var(--tx);margin-bottom:3px}
+.pvlc{font-size:10px;color:var(--tm);margin-bottom:7px}
+.pvp{font-family:var(--serif);font-size:22px;color:var(--gold)}
+.nav-btns{display:flex;gap:10px;padding-top:8px}
+.nbb{flex:1;padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.1);background:transparent;font-family:var(--sans);font-size:11px;color:var(--td);cursor:pointer;letter-spacing:0.5px;transition:all 0.2s}
+.nbn{flex:2;padding:14px;border-radius:12px;border:none;background:linear-gradient(135deg,var(--gold),var(--gl));font-family:var(--sans);font-size:11px;font-weight:600;color:var(--bg);cursor:pointer;letter-spacing:0.5px;box-shadow:0 4px 16px rgba(200,164,50,0.35)}
+.nbs{flex:2;padding:14px;border-radius:12px;border:1px solid rgba(74,222,128,0.4);background:rgba(74,222,128,0.06);font-family:var(--sans);font-size:11px;font-weight:500;color:#4ADE80;cursor:pointer;letter-spacing:0.5px}
 
-/* ===== POST SCREEN ===== */
-.post-hdr{background:var(--deep);padding:18px 20px 22px;border-bottom:1px solid var(--border);}
-.post-row{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
-.bk-btn{width:34px;height:34px;border-radius:50%;background:var(--surface);border:1px solid var(--border);color:var(--text-dim);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
-.bk-btn:hover{border-color:var(--gold-dim);color:var(--gold);}
-.post-title{font-family:var(--serif);font-size:20px;color:var(--text);}
-.post-sub{font-size:10px;color:var(--text-muted);margin-top:1px;letter-spacing:0.5px;}
-.prog-row{display:flex;gap:6px;}
-.prog-seg{height:3px;flex:1;border-radius:2px;transition:all 0.3s;}
-.fwrap{padding:20px 18px;}
-.fst{font-family:var(--serif);font-size:20px;color:var(--text);margin-bottom:4px;}
-.fss{font-size:11px;color:var(--text-muted);margin-bottom:18px;}
-.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px;}
-.tcard{
-  padding:18px 14px;border-radius:14px;border:1px solid var(--border);
-  background:var(--surface);cursor:pointer;text-align:center;transition:all 0.25s;
-}
-.tcard.on{border-color:var(--gold-dim);background:rgba(201,168,76,0.08);box-shadow:0 0 20px rgba(201,168,76,0.1);}
-.tcard.on .tnm{color:var(--gold);}
-.tcard.on .tsub{color:var(--text-dim);}
-.tic{font-size:28px;margin-bottom:7px;}
-.tnm{font-family:var(--serif);font-size:15px;color:var(--text-dim);transition:color 0.2s;}
-.tsub{font-size:9px;color:var(--text-muted);margin-top:2px;transition:color 0.2s;}
-.cat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:18px;}
-.ctile{
-  padding:11px 5px;border-radius:12px;border:1px solid var(--border);
-  background:var(--surface);cursor:pointer;text-align:center;transition:all 0.25s;
-}
-.ctile.on{border-color:var(--gold-dim);background:rgba(201,168,76,0.08);}
-.ctile.on .cnm{color:var(--gold);}
-.cic{font-size:20px;}
-.cnm{font-size:9px;color:var(--text-muted);margin-top:4px;letter-spacing:0.3px;transition:color 0.2s;}
-.flbl{font-size:9px;font-weight:500;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;}
-.finp{
-  width:100%;padding:12px 14px;border-radius:11px;border:1px solid var(--border);
-  background:var(--surface);font-family:var(--sans);font-size:12px;color:var(--text);
-  outline:none;box-sizing:border-box;transition:border-color 0.2s;
-}
-.finp:focus{border-color:var(--gold-dim);}
-.finp::placeholder{color:var(--text-muted);}
-.fsel{
-  width:100%;padding:12px 14px;border-radius:11px;border:1px solid var(--border);
-  background:var(--surface);font-family:var(--sans);font-size:12px;color:var(--text);
-  outline:none;appearance:none;box-sizing:border-box;
-}
-.fsel option{background:var(--surface2);}
-.fta{
-  width:100%;padding:12px 14px;border-radius:11px;border:1px solid var(--border);
-  background:var(--surface);font-family:var(--sans);font-size:11px;color:var(--text);
-  outline:none;resize:vertical;min-height:80px;box-sizing:border-box;
-}
-.fta::placeholder{color:var(--text-muted);}
-.frow2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.fgrp{margin-bottom:14px;}
-.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px;}
-.pmain{aspect-ratio:1;border-radius:12px;background:var(--surface2);border:1px dashed var(--gold-dim);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s;}
-.pmain:hover{background:rgba(201,168,76,0.06);}
-.pslot{aspect-ratio:1;border-radius:12px;border:1px dashed var(--border);background:var(--surface);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s;}
-.pslot:hover{border-color:var(--gold-dim);}
-.tip{border-radius:12px;padding:13px;display:flex;gap:10px;align-items:flex-start;margin-bottom:14px;}
-.tip.amber{background:rgba(201,168,76,0.07);border:1px solid rgba(201,168,76,0.2);}
-.tip.green{background:rgba(74,222,128,0.06);border:1px solid rgba(74,222,128,0.2);}
-.tipt{font-size:10px;line-height:1.8;}
-.pvc{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px;margin-bottom:14px;position:relative;overflow:hidden;}
-.pvc::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);}
-.pvl{font-size:8px;font-weight:500;color:var(--gold);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:8px;}
-.pvt{font-family:var(--serif);font-size:15px;color:var(--text);margin-bottom:3px;}
-.pvlc{font-size:10px;color:var(--text-muted);margin-bottom:6px;}
-.pvp{font-family:var(--serif);font-size:20px;color:var(--gold);}
-.nav-btns{display:flex;gap:10px;padding-top:8px;}
-.nbb{flex:1;padding:13px;border-radius:11px;border:1px solid var(--border);background:transparent;font-family:var(--sans);font-size:11px;font-weight:400;color:var(--text-dim);cursor:pointer;letter-spacing:0.5px;transition:all 0.2s;}
-.nbb:hover{border-color:var(--gold-dim);color:var(--text);}
-.nbn{flex:2;padding:13px;border-radius:11px;border:none;background:linear-gradient(135deg,var(--gold),var(--gold-light));font-family:var(--sans);font-size:11px;font-weight:500;color:var(--obsidian);cursor:pointer;letter-spacing:0.5px;box-shadow:0 4px 14px rgba(201,168,76,0.3);transition:all 0.2s;}
-.nbs{flex:2;padding:13px;border-radius:11px;border:none;background:rgba(74,222,128,0.15);border:1px solid rgba(74,222,128,0.4);font-family:var(--sans);font-size:11px;font-weight:500;color:var(--green);cursor:pointer;letter-spacing:0.5px;}
+/* ══════════════════════ SCREEN HEADER ══════════════════════ */
+.scr-hdr{background:var(--dp);padding:22px 20px 24px;border-bottom:1px solid rgba(255,255,255,0.07);position:relative;overflow:hidden}
+.scr-hdr::after{content:'';position:absolute;top:-60px;right:-60px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(200,164,50,0.07) 0%,transparent 70%);pointer-events:none}
+.sh-eye{font-size:9px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
+.sh-title{font-family:var(--serif);font-size:26px;color:var(--tx);margin-bottom:3px;letter-spacing:-0.3px}
+.sh-sub{font-size:10px;color:var(--tm);letter-spacing:0.3px}
 
-/* ===== BROKERS SCREEN ===== */
-.broker-hdr{background:var(--deep);padding:20px 20px 22px;border-bottom:1px solid var(--border);}
-.brok-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:18px;margin:0 20px 14px;transition:all 0.25s;position:relative;overflow:hidden;}
-.brok-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);}
-.brok-card:hover{border-color:var(--gold-dim);box-shadow:var(--glow);}
-.brok-row{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
-.brok-av{width:56px;height:56px;border-radius:16px;border:1px solid var(--gold-dim);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:20px;font-weight:600;color:var(--gold);flex-shrink:0;}
-.brok-nm{font-family:var(--serif);font-size:16px;color:var(--text);margin-bottom:2px;}
-.brok-role{font-size:10px;color:var(--text-muted);margin-bottom:3px;}
-.brok-dist{font-size:9px;color:var(--gold);letter-spacing:0.8px;text-transform:uppercase;}
-.brok-rating{margin-left:auto;text-align:right;}
-.brok-stars{font-family:var(--serif);font-size:18px;color:var(--gold);}
-.brok-rl{font-size:8px;color:var(--text-muted);margin-top:1px;}
-.brok-stats{display:flex;gap:0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:10px 0;margin-bottom:12px;}
-.brok-s{flex:1;text-align:center;}
-.brok-sv{font-family:var(--serif);font-size:15px;color:var(--gold);}
-.brok-sk{font-size:8px;color:var(--text-muted);letter-spacing:0.4px;text-transform:uppercase;margin-top:1px;}
-.brok-btns{display:flex;gap:8px;}
-.bb{flex:1;padding:10px;border-radius:9px;border:1px solid var(--border);background:transparent;font-family:var(--sans);font-size:10px;color:var(--text-dim);cursor:pointer;letter-spacing:0.3px;transition:all 0.2s;}
-.bb:hover{border-color:var(--gold-dim);color:var(--gold);}
-.bbwa{flex:1;padding:10px;border-radius:9px;border:none;background:rgba(37,211,102,0.12);border:1px solid rgba(37,211,102,0.3);font-family:var(--sans);font-size:10px;color:#25D366;cursor:pointer;}
-.bbg{flex:1;padding:10px;border-radius:9px;border:none;background:linear-gradient(135deg,var(--gold),var(--gold-light));font-family:var(--sans);font-size:10px;color:var(--obsidian);cursor:pointer;font-weight:500;}
+/* ══════════════════════ BROKERS ══════════════════════ */
+.brok-card{background:var(--s1);border:1px solid rgba(255,255,255,0.07);border-radius:22px;padding:18px;margin:0 20px 14px;transition:all 0.25s;position:relative;overflow:hidden}
+.brok-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gd),rgba(200,164,50,0.5),var(--gd),transparent)}
+.brok-card:hover{border-color:rgba(200,164,50,0.3);box-shadow:0 12px 40px rgba(0,0,0,0.3)}
+.brok-top{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.brok-av{width:58px;height:58px;border-radius:18px;border:1px solid rgba(200,164,50,0.3);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:22px;font-weight:600;color:var(--gold);flex-shrink:0;background:rgba(200,164,50,0.07)}
+.brok-nm{font-family:var(--serif);font-size:17px;color:var(--tx);margin-bottom:3px}
+.brok-role{font-size:10px;color:var(--tm);margin-bottom:5px}
+.brok-tags{display:flex;gap:5px;flex-wrap:wrap}
+.brok-tag{font-size:8px;padding:2px 8px;border-radius:4px;background:rgba(13,107,90,0.15);color:var(--tl);border:1px solid rgba(13,107,90,0.3)}
+.brok-stars{margin-left:auto;text-align:right}
+.brok-sv{font-size:18px;color:var(--gold);line-height:1}
+.brok-rl{font-size:8px;color:var(--tm);margin-top:2px}
+.brok-stats{display:flex;border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);padding:11px 0;margin-bottom:13px}
+.bs-i{flex:1;text-align:center}
+.bs-i+.bs-i{border-left:1px solid rgba(255,255,255,0.06)}
+.bs-v{font-family:var(--serif);font-size:16px;color:var(--gold)}
+.bs-k{font-size:8px;color:var(--tm);letter-spacing:0.5px;text-transform:uppercase;margin-top:2px}
+.brok-btns{display:flex;gap:8px}
+.bb{flex:1;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.1);background:transparent;font-family:var(--sans);font-size:10px;color:var(--td);cursor:pointer;transition:all 0.2s}
+.bb:hover{border-color:rgba(200,164,50,0.4);color:var(--gold)}
+.bbwa{flex:1;padding:10px;border-radius:10px;background:rgba(37,211,102,0.1);border:1px solid rgba(37,211,102,0.3);font-family:var(--sans);font-size:10px;color:#25D366;cursor:pointer}
+.bbg{flex:1;padding:10px;border-radius:10px;border:none;background:linear-gradient(135deg,var(--gold),var(--gl));font-family:var(--sans);font-size:10px;color:var(--bg);cursor:pointer;font-weight:600}
 
-/* ===== SAVED / PROFILE ===== */
-.saved-item{background:var(--surface);border:1px solid var(--border);border-radius:14px;margin:0 20px 12px;overflow:hidden;display:flex;cursor:pointer;transition:all 0.2s;}
-.saved-item:hover{border-color:var(--gold-dim);}
-.saved-thumb{width:90px;height:80px;flex-shrink:0;position:relative;overflow:hidden;}
-.saved-thumb img{width:100%;height:100%;object-fit:cover;}
-.saved-body{padding:12px 13px;flex:1;}
-.saved-tag{font-size:8px;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:3px;}
-.saved-t{font-family:var(--serif);font-size:13px;color:var(--text);margin-bottom:2px;}
-.saved-l{font-size:9px;color:var(--text-muted);margin-bottom:5px;}
-.saved-p{font-family:var(--serif);font-size:15px;color:var(--gold);}
+/* ══════════════════════ SAVED ══════════════════════ */
+.saved-item{background:var(--s1);border:1px solid rgba(255,255,255,0.07);border-radius:16px;margin:0 20px 12px;overflow:hidden;display:flex;cursor:pointer;transition:all 0.2s}
+.saved-item:hover{border-color:rgba(200,164,50,0.3);transform:translateX(3px)}
+.sv-thumb{width:92px;height:84px;flex-shrink:0;overflow:hidden}
+.sv-thumb img{width:100%;height:100%;object-fit:cover;transition:transform 0.3s}
+.saved-item:hover .sv-thumb img{transform:scale(1.06)}
+.sv-body{padding:12px 14px;flex:1}
+.sv-tag{font-size:8px;color:var(--gold);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:4px}
+.sv-t{font-family:var(--serif);font-size:14px;color:var(--tx);margin-bottom:3px}
+.sv-l{font-size:9px;color:var(--tm);margin-bottom:6px}
+.sv-p{font-family:var(--serif);font-size:16px;color:var(--gold)}
 
-.prof-hdr{background:var(--deep);padding:24px 20px;border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
-.prof-hdr::before{content:'';position:absolute;top:-30px;right:-30px;width:140px;height:140px;background:radial-gradient(circle,rgba(201,168,76,0.07) 0%,transparent 70%);pointer-events:none;}
-.prof-av{width:62px;height:62px;border-radius:18px;background:rgba(201,168,76,0.12);border:1px solid var(--gold-dim);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:26px;color:var(--gold);}
-.prof-nm{font-family:var(--serif);font-size:20px;color:var(--text);margin-top:10px;}
-.prof-role{font-size:10px;color:var(--text-muted);}
-.prof-badge{display:inline-flex;align-items:center;gap:5px;margin-top:6px;padding:3px 10px;border-radius:4px;background:rgba(201,168,76,0.1);border:1px solid var(--gold-dim);font-size:9px;color:var(--gold);letter-spacing:0.8px;}
-.prof-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:16px 20px;}
-.prof-sb{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:13px;text-align:center;}
-.prof-sv{font-family:var(--serif);font-size:19px;color:var(--gold);}
-.prof-sk{font-size:8px;color:var(--text-muted);letter-spacing:0.5px;text-transform:uppercase;margin-top:2px;}
-.prof-menu{background:var(--surface);border:1px solid var(--border);border-radius:16px;margin:0 20px;overflow:hidden;position:relative;}
-.prof-menu::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);}
-.pm-item{padding:15px 18px;display:flex;align-items:center;gap:13px;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.2s;}
-.pm-item:last-child{border-bottom:none;}
-.pm-item:hover{background:var(--surface2);}
-.pm-ic{font-size:17px;width:24px;text-align:center;}
-.pm-lb{font-size:13px;color:var(--text);flex:1;}
-.pm-ar{color:var(--text-muted);font-size:14px;}
+/* ══════════════════════ PROFILE ══════════════════════ */
+.prof-hdr{background:var(--dp);padding:26px 20px 22px;border-bottom:1px solid rgba(255,255,255,0.07);position:relative;overflow:hidden}
+.prof-hdr::after{content:'';position:absolute;top:-50px;right:-50px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(200,164,50,0.08) 0%,transparent 70%);pointer-events:none}
+.prof-av{width:66px;height:66px;border-radius:20px;background:rgba(200,164,50,0.1);border:1px solid rgba(200,164,50,0.3);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:28px;color:var(--gold)}
+.prof-nm{font-family:var(--serif);font-size:22px;color:var(--tx);margin-top:12px;letter-spacing:-0.3px}
+.prof-role{font-size:10px;color:var(--tm);margin-top:3px}
+.prof-badge{display:inline-flex;align-items:center;gap:6px;margin-top:8px;padding:4px 12px;border-radius:6px;background:rgba(200,164,50,0.08);border:1px solid rgba(200,164,50,0.25);font-size:9px;color:var(--gold);letter-spacing:1px}
+.prof-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:18px 20px 0}
+.ps-box{background:var(--s1);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:14px;text-align:center}
+.ps-v{font-family:var(--serif);font-size:21px;color:var(--gold)}
+.ps-k{font-size:8px;color:var(--tm);letter-spacing:0.5px;text-transform:uppercase;margin-top:3px}
+.prof-menu{background:var(--s1);border:1px solid rgba(255,255,255,0.07);border-radius:20px;margin:16px 20px 0;overflow:hidden;position:relative}
+.prof-menu::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gd),rgba(200,164,50,0.5),var(--gd),transparent)}
+.pm-i{padding:16px 18px;display:flex;align-items:center;gap:14px;border-bottom:1px solid rgba(255,255,255,0.06);cursor:pointer;transition:background 0.2s}
+.pm-i:last-child{border-bottom:none}
+.pm-i:hover{background:var(--s2)}
+.pm-ic{font-size:17px;width:24px;text-align:center}
+.pm-lb{font-size:13px;color:var(--tx);flex:1}
+.pm-ar{color:var(--tm);font-size:14px}
 
-/* Contact sheet */
-.sheet-overlay{display:none;position:absolute;inset:0;background:rgba(12,12,15,0.8);z-index:200;align-items:flex-end;backdrop-filter:blur(4px);}
-.sheet{background:var(--surface);border-radius:24px 24px 0 0;padding:22px 20px 32px;width:100%;border-top:1px solid var(--border);position:relative;}
-.sheet::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);}
-.sheet-pill{width:36px;height:3px;background:var(--border);border-radius:2px;margin:0 auto 18px;}
-.sheet-t{font-family:var(--serif);font-size:20px;color:var(--text);margin-bottom:2px;}
-.sheet-s{font-size:10px;color:var(--text-muted);margin-bottom:18px;letter-spacing:0.3px;}
-.sht-btn{width:100%;padding:14px;border-radius:12px;font-family:var(--sans);font-size:12px;font-weight:400;cursor:pointer;margin-bottom:8px;border:none;letter-spacing:0.5px;}
+/* ══════════════════════ CONTACT SHEET ══════════════════════ */
+.sheet-ov{display:none;position:absolute;inset:0;background:rgba(7,7,15,0.85);z-index:200;align-items:flex-end;backdrop-filter:blur(8px)}
+.sheet{background:var(--s1);border-radius:30px 30px 0 0;padding:24px 20px 36px;width:100%;border-top:1px solid rgba(255,255,255,0.1);position:relative}
+.sheet::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gd),rgba(200,164,50,0.6),var(--gd),transparent)}
+.sh-pill{width:36px;height:3px;background:rgba(255,255,255,0.15);border-radius:2px;margin:0 auto 22px}
+.sh-t{font-family:var(--serif);font-size:22px;color:var(--tx);margin-bottom:3px}
+.sh-s{font-size:10px;color:var(--tm);margin-bottom:22px;letter-spacing:0.3px}
+.sh-btn{width:100%;padding:15px;border-radius:13px;font-family:var(--sans);font-size:12px;font-weight:500;cursor:pointer;margin-bottom:9px;border:none;letter-spacing:0.5px}
 </style>
 </head>
 <body>
 
 <div class="phone">
-  <!-- Status bar -->
-  <div class="statusbar">
-    <span class="sb-time" id="clk">09:41</span>
-    <span class="sb-icons">▲▲ ⬛</span>
+  <div class="sb">
+    <span class="sb-t" id="clk">09:41</span>
+    <span class="sb-i">▲▲ ◼</span>
   </div>
 
-  <!-- ═══════════════════════════════════════════════
-       HOME SCREEN
-  ═══════════════════════════════════════════════ -->
+  <!-- ══════ HOME ══════ -->
   <div class="screen active" id="s-home">
-    <div class="home-hdr">
-      <div class="hdr-row">
-        <div class="hdr-brand">
-          <div class="hdr-loc">📍 Kerala, India</div>
-          <div class="hdr-title">Kerala <em>Homes</em></div>
+    <div class="home-hero">
+      <div class="hero-orb1"></div>
+      <div class="hero-orb2"></div>
+      <div class="h-toprow">
+        <div class="h-loc">
+          <div class="h-loc-dot"></div>
+          <span class="h-loc-txt">Kerala, India</span>
+          <span class="h-loc-arr">▾</span>
         </div>
-        <button class="post-btn" onclick="go('post')">+ POST AD</button>
+        <div class="h-acts">
+          <div class="h-bell">🔔<div class="h-bell-dot"></div></div>
+          <div class="h-av" onclick="go('profile')">B</div>
+        </div>
       </div>
-      <div class="search-wrap">
-        <span class="search-icon">✦</span>
-        <input class="search-input" placeholder="Search area, locality, property type…"/>
+      <div class="h-eye"><span></span>GOD'S OWN COUNTRY</div>
+      <div class="h-tagline">Discover Estates<br>That Define <em>Legacy</em></div>
+      <div class="h-sub">174+ verified properties across 14 districts</div>
+      <div class="search-box">
+        <span class="s-ic">🔍</span>
+        <input class="s-inp" placeholder="Search area, locality, property type…"/>
+        <button class="s-btn">Search</button>
       </div>
     </div>
 
-    <!-- District chips -->
-    <div class="chips-row" id="dc">
+    <div class="chips" id="dc">
       <button class="chip on" onclick="dchip(this)">🌴 All Kerala</button>
       <button class="chip" onclick="dchip(this)">Thrissur</button>
       <button class="chip" onclick="dchip(this)">Ernakulam</button>
@@ -399,497 +369,267 @@ img{object-fit:cover;display:block;}
       <button class="chip" onclick="dchip(this)">Kottayam</button>
       <button class="chip" onclick="dchip(this)">Kannur</button>
     </div>
-    <!-- Type chips -->
-    <div class="chips-row" id="tc" style="padding-top:0;gap:6px;">
+    <div class="chips" id="tc" style="padding-top:4px;gap:6px">
       <button class="chip on" onclick="tchip(this)">All</button>
       <button class="chip" onclick="tchip(this)">🏠 Rent</button>
       <button class="chip" onclick="tchip(this)">🏷 Sale</button>
-      <span style="width:1px;background:var(--border);margin:0 2px;display:block;height:22px;align-self:center;flex-shrink:0;"></span>
+      <span class="chip-sep"></span>
       <button class="chip" onclick="tchip(this)">House</button>
       <button class="chip" onclick="tchip(this)">Flat</button>
       <button class="chip" onclick="tchip(this)">Villa</button>
       <button class="chip" onclick="tchip(this)">Plot</button>
     </div>
 
-    <div class="gold-div"></div>
+    <div class="auric-line"></div>
 
-    <!-- Featured -->
-    <div class="sect" style="padding-bottom:0;">
+    <div class="sect" style="padding-bottom:14px">
       <div class="sect-hdr">
-        <span class="sect-t">Featured Properties</span>
-        <span class="sect-s">View all →</span>
-      </div>
-    </div>
-    <div class="feat-scroll">
-      <div class="fcard" onclick="go('detail',0)">
-        <div class="fcard-img">
-          <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=500&q=85" alt="House" loading="lazy"/>
-          <div class="fcard-img-overlay"></div>
-          <div class="fcard-badge"><span class="badge badge-r">For Rent</span><span class="badge badge-n">New</span></div>
-          <div class="fcard-price">₹28,000<span style="font-size:12px;color:rgba(240,237,232,0.5)">/mo</span></div>
-          <button class="fcard-heart">♡</button>
-        </div>
-        <div class="fcard-body">
-          <div class="fname">4BHK Independent House</div>
-          <div class="floc">📍 Pattom, Thiruvananthapuram</div>
-        </div>
-      </div>
-      <div class="fcard" onclick="go('detail',1)">
-        <div class="fcard-img">
-          <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?w=500&q=85" alt="Villa" loading="lazy"/>
-          <div class="fcard-img-overlay"></div>
-          <div class="fcard-badge"><span class="badge badge-s">For Sale</span></div>
-          <div class="fcard-price">₹9.5 Cr</div>
-          <button class="fcard-heart">♡</button>
-        </div>
-        <div class="fcard-body">
-          <div class="fname">Luxury Villa with Pool</div>
-          <div class="floc">📍 Kakkanad, Ernakulam</div>
-        </div>
-      </div>
-      <div class="fcard" onclick="go('detail',2)">
-        <div class="fcard-img">
-          <img src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=500&q=85" alt="Beachfront" loading="lazy"/>
-          <div class="fcard-img-overlay"></div>
-          <div class="fcard-badge"><span class="badge badge-s">For Sale</span><span class="badge badge-n">New</span></div>
-          <div class="fcard-price">₹1.85 Cr</div>
-          <button class="fcard-heart">♡</button>
-        </div>
-        <div class="fcard-body">
-          <div class="fname">Beachfront Villa, Cherai</div>
-          <div class="floc">📍 Cherai Beach, Ernakulam</div>
-        </div>
-      </div>
-      <div class="fcard" onclick="go('detail',3)">
-        <div class="fcard-img">
-          <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=500&q=85" alt="Heritage" loading="lazy"/>
-          <div class="fcard-img-overlay"></div>
-          <div class="fcard-badge"><span class="badge badge-s">For Sale</span></div>
-          <div class="fcard-price">₹75 L</div>
-          <button class="fcard-heart">♡</button>
-        </div>
-        <div class="fcard-body">
-          <div class="fname">Nalukettu Heritage Home</div>
-          <div class="floc">📍 Thrissur City</div>
-        </div>
+        <span class="sect-t">Featured <em>Estates</em></span>
+        <span class="sect-link">See All →</span>
       </div>
     </div>
 
-    <!-- Stats -->
-    <div class="stats">
-      <div><div class="sv">174<span style="font-size:14px;color:var(--gold-dim)">+</span></div><div class="sl">Active Listings</div></div>
-      <div class="st-div"></div>
-      <div><div class="sv">14</div><div class="sl">Districts</div></div>
-      <div class="st-div"></div>
-      <div><div class="sv">4.9<span style="font-size:12px;color:var(--gold-dim)">★</span></div><div class="sl">Avg Rating</div></div>
+    <!-- Rotating hero banner -->
+    <div class="hero-banner" id="hb" onclick="go('detail',heroIdx)">
+      <img class="hb-img" id="hb-img" src="" alt=""/>
+      <div class="hb-overlay"></div>
+      <div class="hb-top">
+        <div id="hb-badge"></div>
+        <button class="hb-heart" id="hb-heart" onclick="event.stopPropagation();toggleHbHeart()">♡</button>
+      </div>
+      <div class="hb-bottom">
+        <div class="hb-price" id="hb-price"></div>
+        <div class="hb-name" id="hb-name"></div>
+        <div class="hb-loc" id="hb-loc"></div>
+        <div class="hb-dots" id="hb-dots"></div>
+      </div>
+      <div class="hb-view">View Details →</div>
     </div>
 
-    <!-- All listings -->
+    <div class="sect" style="padding-bottom:0;margin-top:20px">
+      <div class="sect-hdr">
+        <span class="sect-t">Quick <em>Browse</em></span>
+      </div>
+    </div>
+    <div class="feat-reel">
+      <div class="fc" onclick="go('detail',0)">
+        <div class="fc-img"><img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400&q=80" alt="" loading="lazy"/><div class="fc-ov"></div><div class="fc-badge"><span class="badge b-r">Rent</span></div><div class="fc-price">₹28K<span style="font-size:11px;opacity:0.6">/mo</span></div><button class="fc-hrt">♡</button></div>
+        <div class="fc-body"><div class="fc-name">4BHK Independent House</div><div class="fc-loc">📍 Pattom, TVM</div></div>
+      </div>
+      <div class="fc" onclick="go('detail',2)">
+        <div class="fc-img"><img src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=400&q=80" alt="" loading="lazy"/><div class="fc-ov"></div><div class="fc-badge"><span class="badge b-s">Sale</span></div><div class="fc-price">₹1.85 Cr</div><button class="fc-hrt">♡</button></div>
+        <div class="fc-body"><div class="fc-name">Beachfront Villa, Cherai</div><div class="fc-loc">📍 Cherai, Ernakulam</div></div>
+      </div>
+      <div class="fc" onclick="go('detail',3)">
+        <div class="fc-img"><img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=400&q=80" alt="" loading="lazy"/><div class="fc-ov"></div><div class="fc-badge"><span class="badge b-s">Sale</span></div><div class="fc-price">₹75 L</div><button class="fc-hrt">♡</button></div>
+        <div class="fc-body"><div class="fc-name">Nalukettu Heritage Home</div><div class="fc-loc">📍 Thrissur City</div></div>
+      </div>
+      <div class="fc" onclick="go('detail',4)">
+        <div class="fc-img"><img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=400&q=80" alt="" loading="lazy"/><div class="fc-ov"></div><div class="fc-badge"><span class="badge b-r">Rent</span></div><div class="fc-price">₹32K<span style="font-size:11px;opacity:0.6">/mo</span></div><button class="fc-hrt">♡</button></div>
+        <div class="fc-body"><div class="fc-name">3BHK Premium Apartment</div><div class="fc-loc">📍 Marine Drive, EKM</div></div>
+      </div>
+    </div>
+
+    <div class="stats-wrap">
+      <div><div class="stat-v">174<span style="font-size:15px;color:var(--gd)">+</span></div><div class="stat-l">Listings</div></div>
+      <div class="stat-d"></div>
+      <div><div class="stat-v">14</div><div class="stat-l">Districts</div></div>
+      <div class="stat-d"></div>
+      <div><div class="stat-v">4.9<span style="font-size:13px;color:var(--gd)">★</span></div><div class="stat-l">Avg Rating</div></div>
+    </div>
+
     <div class="sect">
-      <div class="sect-hdr" style="margin-bottom:16px;">
-        <span class="sect-t">All Properties</span>
-        <span class="sect-s" style="font-size:9px;">Latest First</span>
+      <div class="sect-hdr">
+        <span class="sect-t">All <em>Properties</em></span>
+        <span class="sect-link" style="font-size:9px">Latest First</span>
       </div>
     </div>
 
-    <!-- Property Cards -->
     <div class="pcard" onclick="go('detail',0)">
-      <div class="pcard-img">
-        <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=720&q=85" alt="" loading="lazy"/>
-        <div class="pcard-overlay"></div>
-        <div class="pcard-badges"><span class="badge badge-r">For Rent</span><span class="badge badge-n">New</span></div>
-        <button class="pcard-heart">♡</button>
-        <div class="pcard-price"><div class="pcard-price-val">₹28,000<span style="font-size:13px;opacity:0.5">/mo</span></div></div>
-      </div>
-      <div class="pcard-body">
-        <div class="pcard-tag">House Rent</div>
-        <div class="pcard-title">4BHK Independent House</div>
-        <div class="pcard-loc">📍 Pattom, Thiruvananthapuram, Kerala</div>
-        <div class="pcard-specs">
-          <div class="spec-i"><div class="spec-v">4</div><div class="spec-k">Beds</div></div>
-          <div class="spec-i"><div class="spec-v">3</div><div class="spec-k">Baths</div></div>
-          <div class="spec-i"><div class="spec-v">2,200</div><div class="spec-k">Sq Ft</div></div>
-          <div class="spec-i"><div class="spec-v">Yes</div><div class="spec-k">Park</div></div>
-        </div>
-      </div>
+      <div class="pc-img"><img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=720&q=85" alt="" loading="lazy"/><div class="pc-ov"></div><div class="pc-top"><span class="badge b-r">For Rent</span><span class="badge b-n" style="margin-left:5px">New</span><button class="pc-hrt" onclick="event.stopPropagation();this.classList.toggle('loved');this.textContent=this.classList.contains('loved')?'♥':'♡'">♡</button></div><div class="pc-price"><div class="pc-pv">₹28,000<span style="font-size:13px;opacity:0.5">/mo</span></div></div></div>
+      <div class="pc-body"><div class="pc-lbl">House · Rent</div><div class="pc-title">4BHK Independent House</div><div class="pc-tagline">Spacious family home in the heart of the capital</div><div class="pc-loc">📍 Pattom, Thiruvananthapuram, Kerala</div><div class="pc-specs"><div class="ps-i"><div class="ps-v">4</div><div class="ps-k">Beds</div></div><div class="ps-i"><div class="ps-v">3</div><div class="ps-k">Baths</div></div><div class="ps-i"><div class="ps-v">2,200</div><div class="ps-k">Sq Ft</div></div><div class="ps-i"><div class="ps-v">Yes</div><div class="ps-k">Parking</div></div></div></div>
     </div>
 
     <div class="pcard" onclick="go('detail',1)">
-      <div class="pcard-img">
-        <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?w=720&q=85" alt="" loading="lazy"/>
-        <div class="pcard-overlay"></div>
-        <div class="pcard-badges"><span class="badge badge-s">For Sale</span></div>
-        <button class="pcard-heart">♡</button>
-        <div class="pcard-price"><div class="pcard-price-val">₹9.5 Cr</div></div>
-      </div>
-      <div class="pcard-body">
-        <div class="pcard-tag">Villa Sale</div>
-        <div class="pcard-title">Luxury Villa with Swimming Pool</div>
-        <div class="pcard-loc">📍 Kakkanad, Ernakulam, Kerala</div>
-        <div class="pcard-specs">
-          <div class="spec-i"><div class="spec-v">5</div><div class="spec-k">Beds</div></div>
-          <div class="spec-i"><div class="spec-v">4</div><div class="spec-k">Baths</div></div>
-          <div class="spec-i"><div class="spec-v">3,800</div><div class="spec-k">Sq Ft</div></div>
-          <div class="spec-i"><div class="spec-v">Pool</div><div class="spec-k">Amenity</div></div>
-        </div>
-      </div>
+      <div class="pc-img"><img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?w=720&q=85" alt="" loading="lazy"/><div class="pc-ov"></div><div class="pc-top"><span class="badge b-s">For Sale</span><span class="badge b-v" style="margin-left:5px">Verified</span><button class="pc-hrt" onclick="event.stopPropagation();this.classList.toggle('loved');this.textContent=this.classList.contains('loved')?'♥':'♡'">♡</button></div><div class="pc-price"><div class="pc-pv">₹9.5 Cr</div></div></div>
+      <div class="pc-body"><div class="pc-lbl">Villa · Sale</div><div class="pc-title">Luxury Villa with Swimming Pool</div><div class="pc-tagline">Where opulence meets the Kerala skyline</div><div class="pc-loc">📍 Kakkanad, Ernakulam, Kerala</div><div class="pc-specs"><div class="ps-i"><div class="ps-v">5</div><div class="ps-k">Beds</div></div><div class="ps-i"><div class="ps-v">4</div><div class="ps-k">Baths</div></div><div class="ps-i"><div class="ps-v">3,800</div><div class="ps-k">Sq Ft</div></div><div class="ps-i"><div class="ps-v">Pool</div><div class="ps-k">Amenity</div></div></div></div>
     </div>
 
     <div class="pcard" onclick="go('detail',4)">
-      <div class="pcard-img">
-        <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=720&q=85" alt="" loading="lazy"/>
-        <div class="pcard-overlay"></div>
-        <div class="pcard-badges"><span class="badge badge-r">For Rent</span></div>
-        <button class="pcard-heart">♡</button>
-        <div class="pcard-price"><div class="pcard-price-val">₹32,000<span style="font-size:13px;opacity:0.5">/mo</span></div></div>
-      </div>
-      <div class="pcard-body">
-        <div class="pcard-tag">Flat Rent</div>
-        <div class="pcard-title">3BHK Premium Apartment</div>
-        <div class="pcard-loc">📍 Marine Drive, Ernakulam, Kerala</div>
-        <div class="pcard-specs">
-          <div class="spec-i"><div class="spec-v">3</div><div class="spec-k">Beds</div></div>
-          <div class="spec-i"><div class="spec-v">2</div><div class="spec-k">Baths</div></div>
-          <div class="spec-i"><div class="spec-v">1,800</div><div class="spec-k">Sq Ft</div></div>
-          <div class="spec-i"><div class="spec-v">Gym</div><div class="spec-k">Amenity</div></div>
-        </div>
-      </div>
+      <div class="pc-img"><img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=720&q=85" alt="" loading="lazy"/><div class="pc-ov"></div><div class="pc-top"><span class="badge b-r">For Rent</span><button class="pc-hrt" onclick="event.stopPropagation();this.classList.toggle('loved');this.textContent=this.classList.contains('loved')?'♥':'♡'">♡</button></div><div class="pc-price"><div class="pc-pv">₹32,000<span style="font-size:13px;opacity:0.5">/mo</span></div></div></div>
+      <div class="pc-body"><div class="pc-lbl">Flat · Rent</div><div class="pc-title">3BHK Premium Apartment</div><div class="pc-tagline">Waking up to Marine Drive every morning</div><div class="pc-loc">📍 Marine Drive, Ernakulam, Kerala</div><div class="pc-specs"><div class="ps-i"><div class="ps-v">3</div><div class="ps-k">Beds</div></div><div class="ps-i"><div class="ps-v">2</div><div class="ps-k">Baths</div></div><div class="ps-i"><div class="ps-v">1,800</div><div class="ps-k">Sq Ft</div></div><div class="ps-i"><div class="ps-v">Gym</div><div class="ps-k">Amenity</div></div></div></div>
     </div>
 
     <div class="pcard" onclick="go('detail',2)">
-      <div class="pcard-img">
-        <img src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=720&q=85" alt="" loading="lazy"/>
-        <div class="pcard-overlay"></div>
-        <div class="pcard-badges"><span class="badge badge-s">For Sale</span><span class="badge badge-n">New</span></div>
-        <button class="pcard-heart">♡</button>
-        <div class="pcard-price"><div class="pcard-price-val">₹1.85 Cr</div></div>
-      </div>
-      <div class="pcard-body">
-        <div class="pcard-tag">Villa Sale</div>
-        <div class="pcard-title">Beachfront Villa, Cherai Beach</div>
-        <div class="pcard-loc">📍 Cherai Beach, Ernakulam, Kerala</div>
-        <div class="pcard-specs">
-          <div class="spec-i"><div class="spec-v">4</div><div class="spec-k">Beds</div></div>
-          <div class="spec-i"><div class="spec-v">3</div><div class="spec-k">Baths</div></div>
-          <div class="spec-i"><div class="spec-v">3,200</div><div class="spec-k">Sq Ft</div></div>
-          <div class="spec-i"><div class="spec-v">Sea</div><div class="spec-k">View</div></div>
-        </div>
-      </div>
+      <div class="pc-img"><img src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=720&q=85" alt="" loading="lazy"/><div class="pc-ov"></div><div class="pc-top"><span class="badge b-s">For Sale</span><span class="badge b-n" style="margin-left:5px">New</span><button class="pc-hrt" onclick="event.stopPropagation();this.classList.toggle('loved');this.textContent=this.classList.contains('loved')?'♥':'♡'">♡</button></div><div class="pc-price"><div class="pc-pv">₹1.85 Cr</div></div></div>
+      <div class="pc-body"><div class="pc-lbl">Villa · Sale</div><div class="pc-title">Beachfront Villa, Cherai Beach</div><div class="pc-tagline">Fall asleep to the sound of the Arabian Sea</div><div class="pc-loc">📍 Cherai Beach, Ernakulam, Kerala</div><div class="pc-specs"><div class="ps-i"><div class="ps-v">4</div><div class="ps-k">Beds</div></div><div class="ps-i"><div class="ps-v">3</div><div class="ps-k">Baths</div></div><div class="ps-i"><div class="ps-v">3,200</div><div class="ps-k">Sq Ft</div></div><div class="ps-i"><div class="ps-v">Sea</div><div class="ps-k">View</div></div></div></div>
     </div>
 
     <div class="pcard" onclick="go('detail',5)">
-      <div class="pcard-img">
-        <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=720&q=85" alt="" loading="lazy"/>
-        <div class="pcard-overlay"></div>
-        <div class="pcard-badges"><span class="badge badge-r">For Rent</span></div>
-        <button class="pcard-heart">♡</button>
-        <div class="pcard-price"><div class="pcard-price-val">₹18,000<span style="font-size:13px;opacity:0.5">/mo</span></div></div>
-      </div>
-      <div class="pcard-body">
-        <div class="pcard-tag">Flat Rent</div>
-        <div class="pcard-title">2BHK Sea View Apartment</div>
-        <div class="pcard-loc">📍 Beach Road, Kozhikode, Kerala</div>
-        <div class="pcard-specs">
-          <div class="spec-i"><div class="spec-v">2</div><div class="spec-k">Beds</div></div>
-          <div class="spec-i"><div class="spec-v">2</div><div class="spec-k">Baths</div></div>
-          <div class="spec-i"><div class="spec-v">1,200</div><div class="spec-k">Sq Ft</div></div>
-          <div class="spec-i"><div class="spec-v">Sea</div><div class="spec-k">View</div></div>
-        </div>
-      </div>
+      <div class="pc-img"><img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=720&q=85" alt="" loading="lazy"/><div class="pc-ov"></div><div class="pc-top"><span class="badge b-r">For Rent</span><button class="pc-hrt" onclick="event.stopPropagation();this.classList.toggle('loved');this.textContent=this.classList.contains('loved')?'♥':'♡'">♡</button></div><div class="pc-price"><div class="pc-pv">₹18,000<span style="font-size:13px;opacity:0.5">/mo</span></div></div></div>
+      <div class="pc-body"><div class="pc-lbl">Flat · Rent</div><div class="pc-title">2BHK Sea View Apartment</div><div class="pc-tagline">Golden sunsets over Kozhikode's horizon</div><div class="pc-loc">📍 Beach Road, Kozhikode, Kerala</div><div class="pc-specs"><div class="ps-i"><div class="ps-v">2</div><div class="ps-k">Beds</div></div><div class="ps-i"><div class="ps-v">2</div><div class="ps-k">Baths</div></div><div class="ps-i"><div class="ps-v">1,200</div><div class="ps-k">Sq Ft</div></div><div class="ps-i"><div class="ps-v">Sea</div><div class="ps-k">View</div></div></div></div>
     </div>
 
     <div class="pcard" onclick="go('detail',3)">
-      <div class="pcard-img">
-        <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=720&q=85" alt="" loading="lazy"/>
-        <div class="pcard-overlay"></div>
-        <div class="pcard-badges"><span class="badge badge-s">For Sale</span></div>
-        <button class="pcard-heart">♡</button>
-        <div class="pcard-price"><div class="pcard-price-val">₹75 L</div></div>
-      </div>
-      <div class="pcard-body">
-        <div class="pcard-tag">House Sale</div>
-        <div class="pcard-title">Traditional Nalukettu Heritage Home</div>
-        <div class="pcard-loc">📍 Thrissur City, Thrissur, Kerala</div>
-        <div class="pcard-specs">
-          <div class="spec-i"><div class="spec-v">6</div><div class="spec-k">Beds</div></div>
-          <div class="spec-i"><div class="spec-v">4</div><div class="spec-k">Baths</div></div>
-          <div class="spec-i"><div class="spec-v">4,200</div><div class="spec-k">Sq Ft</div></div>
-          <div class="spec-i"><div class="spec-v">100yr</div><div class="spec-k">Heritage</div></div>
-        </div>
-      </div>
+      <div class="pc-img"><img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=720&q=85" alt="" loading="lazy"/><div class="pc-ov"></div><div class="pc-top"><span class="badge b-s">For Sale</span><span class="badge b-v" style="margin-left:5px">Heritage</span><button class="pc-hrt" onclick="event.stopPropagation();this.classList.toggle('loved');this.textContent=this.classList.contains('loved')?'♥':'♡'">♡</button></div><div class="pc-price"><div class="pc-pv">₹75 L</div></div></div>
+      <div class="pc-body"><div class="pc-lbl">House · Sale</div><div class="pc-title">Traditional Nalukettu Heritage Home</div><div class="pc-tagline">A century of stories waiting to become yours</div><div class="pc-loc">📍 Thrissur City, Thrissur, Kerala</div><div class="pc-specs"><div class="ps-i"><div class="ps-v">6</div><div class="ps-k">Beds</div></div><div class="ps-i"><div class="ps-v">4</div><div class="ps-k">Baths</div></div><div class="ps-i"><div class="ps-v">4,200</div><div class="ps-k">Sq Ft</div></div><div class="ps-i"><div class="ps-v">100yr</div><div class="ps-k">Heritage</div></div></div></div>
     </div>
 
     <div class="pcard" onclick="go('detail',6)">
-      <div class="pcard-img">
-        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=720&q=85" alt="" loading="lazy"/>
-        <div class="pcard-overlay"></div>
-        <div class="pcard-badges"><span class="badge badge-s">For Sale</span><span class="badge badge-n">New</span></div>
-        <button class="pcard-heart">♡</button>
-        <div class="pcard-price"><div class="pcard-price-val">₹42 L</div></div>
-      </div>
-      <div class="pcard-body">
-        <div class="pcard-tag">Plot Sale</div>
-        <div class="pcard-title">Residential Plot — DTCP Approved</div>
-        <div class="pcard-loc">📍 Palakkad Bypass, Palakkad, Kerala</div>
-        <div class="pcard-specs">
-          <div class="spec-i"><div class="spec-v">15</div><div class="spec-k">Cents</div></div>
-          <div class="spec-i"><div class="spec-v">North</div><div class="spec-k">Facing</div></div>
-          <div class="spec-i"><div class="spec-v">Road</div><div class="spec-k">Access</div></div>
-          <div class="spec-i"><div class="spec-v">DTCP</div><div class="spec-k">Approved</div></div>
-        </div>
-      </div>
+      <div class="pc-img"><img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=720&q=85" alt="" loading="lazy"/><div class="pc-ov"></div><div class="pc-top"><span class="badge b-s">For Sale</span><span class="badge b-n" style="margin-left:5px">New</span><button class="pc-hrt" onclick="event.stopPropagation();this.classList.toggle('loved');this.textContent=this.classList.contains('loved')?'♥':'♡'">♡</button></div><div class="pc-price"><div class="pc-pv">₹42 L</div></div></div>
+      <div class="pc-body"><div class="pc-lbl">Plot · Sale</div><div class="pc-title">Residential Plot — DTCP Approved</div><div class="pc-tagline">Build your dream on fertile Kerala soil</div><div class="pc-loc">📍 Palakkad Bypass, Palakkad, Kerala</div><div class="pc-specs"><div class="ps-i"><div class="ps-v">15</div><div class="ps-k">Cents</div></div><div class="ps-i"><div class="ps-v">North</div><div class="ps-k">Facing</div></div><div class="ps-i"><div class="ps-v">Road</div><div class="ps-k">Access</div></div><div class="ps-i"><div class="ps-v">DTCP</div><div class="ps-k">Approved</div></div></div></div>
     </div>
 
     <div class="pcard" onclick="go('detail',7)">
-      <div class="pcard-img">
-        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=720&q=85" alt="" loading="lazy"/>
-        <div class="pcard-overlay"></div>
-        <div class="pcard-badges"><span class="badge badge-r">For Rent</span><span class="badge badge-n">New</span></div>
-        <button class="pcard-heart">♡</button>
-        <div class="pcard-price"><div class="pcard-price-val">₹20,000<span style="font-size:13px;opacity:0.5">/mo</span></div></div>
-      </div>
-      <div class="pcard-body">
-        <div class="pcard-tag">House Rent</div>
-        <div class="pcard-title">3BHK Near Guruvayur Temple</div>
-        <div class="pcard-loc">📍 Guruvayur, Thrissur, Kerala</div>
-        <div class="pcard-specs">
-          <div class="spec-i"><div class="spec-v">3</div><div class="spec-k">Beds</div></div>
-          <div class="spec-i"><div class="spec-v">2</div><div class="spec-k">Baths</div></div>
-          <div class="spec-i"><div class="spec-v">1,600</div><div class="spec-k">Sq Ft</div></div>
-          <div class="spec-i"><div class="spec-v">Temple</div><div class="spec-k">Nearby</div></div>
-        </div>
-      </div>
+      <div class="pc-img"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=720&q=85" alt="" loading="lazy"/><div class="pc-ov"></div><div class="pc-top"><span class="badge b-r">For Rent</span><span class="badge b-n" style="margin-left:5px">New</span><button class="pc-hrt" onclick="event.stopPropagation();this.classList.toggle('loved');this.textContent=this.classList.contains('loved')?'♥':'♡'">♡</button></div><div class="pc-price"><div class="pc-pv">₹20,000<span style="font-size:13px;opacity:0.5">/mo</span></div></div></div>
+      <div class="pc-body"><div class="pc-lbl">House · Rent</div><div class="pc-title">3BHK Near Guruvayur Temple</div><div class="pc-tagline">Live in the spiritual heart of Kerala</div><div class="pc-loc">📍 Guruvayur, Thrissur, Kerala</div><div class="pc-specs"><div class="ps-i"><div class="ps-v">3</div><div class="ps-k">Beds</div></div><div class="ps-i"><div class="ps-v">2</div><div class="ps-k">Baths</div></div><div class="ps-i"><div class="ps-v">1,600</div><div class="ps-k">Sq Ft</div></div><div class="ps-i"><div class="ps-v">Temple</div><div class="ps-k">Nearby</div></div></div></div>
     </div>
 
-    <div style="height:24px;"></div>
+    <div style="height:28px"></div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════
-       DETAIL SCREEN
-  ═══════════════════════════════════════════════ -->
-  <div class="screen" id="s-detail">
-    <div id="det-inner"></div>
-  </div>
+  <!-- ══════ DETAIL ══════ -->
+  <div class="screen" id="s-detail"><div id="det-inner"></div></div>
 
-  <!-- ═══════════════════════════════════════════════
-       POST AD SCREEN
-  ═══════════════════════════════════════════════ -->
+  <!-- ══════ POST ══════ -->
   <div class="screen" id="s-post">
     <div class="post-hdr">
       <div class="post-row">
         <button class="bk-btn" onclick="go('home')">←</button>
         <div>
-          <div class="post-title">Post Your Property</div>
-          <div class="post-sub" id="steplbl">Step 1 of 4</div>
+          <div style="font-family:var(--serif);font-size:20px;color:var(--tx)">Post Your Property</div>
+          <div style="font-size:10px;color:var(--tm);margin-top:1px;letter-spacing:0.5px" id="steplbl">Step 1 of 4</div>
         </div>
       </div>
       <div class="prog-row" id="progrow">
-        <div class="prog-seg" style="background:var(--gold);"></div>
-        <div class="prog-seg" style="background:var(--border);"></div>
-        <div class="prog-seg" style="background:var(--border);"></div>
-        <div class="prog-seg" style="background:var(--border);"></div>
+        <div class="prog-s" style="background:var(--gold)"></div>
+        <div class="prog-s" style="background:rgba(255,255,255,0.1)"></div>
+        <div class="prog-s" style="background:rgba(255,255,255,0.1)"></div>
+        <div class="prog-s" style="background:rgba(255,255,255,0.1)"></div>
       </div>
     </div>
     <div class="fwrap" id="stepwrap"></div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════
-       BROKERS SCREEN
-  ═══════════════════════════════════════════════ -->
+  <!-- ══════ BROKERS ══════ -->
   <div class="screen" id="s-brokers">
-    <div class="broker-hdr">
-      <div style="font-size:9px;color:var(--gold);letter-spacing:2px;margin-bottom:5px;text-transform:uppercase;">Verified Experts</div>
-      <div style="font-family:var(--serif);font-size:24px;color:var(--text);">Our Brokers</div>
-      <div style="font-size:10px;color:var(--text-muted);margin-top:2px;">Kerala's finest property professionals</div>
+    <div class="scr-hdr">
+      <div class="sh-eye">Keralite Brokers</div>
+      <div class="sh-title">The Brothers</div>
+      <div class="sh-sub">Brothers by blood. Homes by heart.</div>
     </div>
-    <div style="height:18px;"></div>
+    <div style="height:18px"></div>
+
     <div class="brok-card">
-      <div class="brok-row">
-        <div class="brok-av">RM</div>
-        <div>
-          <div class="brok-nm">Rajesh Menon</div>
-          <div class="brok-role">Senior Property Broker</div>
-          <div class="brok-dist">📍 Thrissur</div>
+      <div class="brok-top">
+        <div class="brok-av">RK</div>
+        <div style="flex:1">
+          <div class="brok-nm">Renju Krishna</div>
+          <div class="brok-role">Co-Founder · Senior Broker</div>
+          <div class="brok-tags"><span class="brok-tag">Thrissur</span><span class="brok-tag">Ernakulam</span><span class="brok-tag">Kozhikode</span></div>
         </div>
-        <div class="brok-rating"><div class="brok-stars">4.9★</div><div class="brok-rl">142 reviews</div></div>
+        <div class="brok-stars"><div class="brok-sv">4.9 ★</div><div class="brok-rl">186 reviews</div></div>
       </div>
+      <div style="font-family:var(--serif);font-size:11px;font-style:italic;color:var(--td);margin-bottom:13px;line-height:1.5">"Every home I sell carries a piece of my family's promise."</div>
       <div class="brok-stats">
-        <div class="brok-s"><div class="brok-sv">142</div><div class="brok-sk">Deals</div></div>
-        <div class="brok-s" style="border-left:1px solid var(--border);"><div class="brok-sv">12yr</div><div class="brok-sk">Experience</div></div>
-        <div class="brok-s" style="border-left:1px solid var(--border);"><div class="brok-sv">KL</div><div class="brok-sk">State</div></div>
+        <div class="bs-i"><div class="bs-v">186</div><div class="bs-k">Deals</div></div>
+        <div class="bs-i"><div class="bs-v">14yr</div><div class="bs-k">Experience</div></div>
+        <div class="bs-i"><div class="bs-v">~1hr</div><div class="bs-k">Response</div></div>
       </div>
       <div class="brok-btns">
-        <button class="bb">📞 Call</button>
-        <button class="bbwa">💬 WhatsApp</button>
+        <button class="bb" onclick="window.location='tel:9947044118'">📞 Call</button>
+        <button class="bbwa" onclick="window.open('https://wa.me/919947044118')">💬 WhatsApp</button>
         <button class="bbg">Listings</button>
       </div>
     </div>
+
     <div class="brok-card">
-      <div class="brok-row">
-        <div class="brok-av">PK</div>
-        <div>
-          <div class="brok-nm">Priya Krishnan</div>
-          <div class="brok-role">Property Consultant</div>
-          <div class="brok-dist">📍 Ernakulam</div>
+      <div class="brok-top">
+        <div class="brok-av">HK</div>
+        <div style="flex:1">
+          <div class="brok-nm">Hari Krishna</div>
+          <div class="brok-role">Co-Founder · Property Consultant</div>
+          <div class="brok-tags"><span class="brok-tag">Ernakulam</span><span class="brok-tag">Kottayam</span><span class="brok-tag">Thiruvananthapuram</span></div>
         </div>
-        <div class="brok-rating"><div class="brok-stars">4.8★</div><div class="brok-rl">98 reviews</div></div>
+        <div class="brok-stars"><div class="brok-sv">4.9 ★</div><div class="brok-rl">154 reviews</div></div>
       </div>
+      <div style="font-family:var(--serif);font-size:11px;font-style:italic;color:var(--td);margin-bottom:13px;line-height:1.5">"Finding your home is not a transaction. It is a trust."</div>
       <div class="brok-stats">
-        <div class="brok-s"><div class="brok-sv">98</div><div class="brok-sk">Deals</div></div>
-        <div class="brok-s" style="border-left:1px solid var(--border);"><div class="brok-sv">8yr</div><div class="brok-sk">Experience</div></div>
-        <div class="brok-s" style="border-left:1px solid var(--border);"><div class="brok-sv">KL</div><div class="brok-sk">State</div></div>
+        <div class="bs-i"><div class="bs-v">154</div><div class="bs-k">Deals</div></div>
+        <div class="bs-i"><div class="bs-v">12yr</div><div class="bs-k">Experience</div></div>
+        <div class="bs-i"><div class="bs-v">~2hr</div><div class="bs-k">Response</div></div>
       </div>
       <div class="brok-btns">
-        <button class="bb">📞 Call</button>
-        <button class="bbwa">💬 WhatsApp</button>
+        <button class="bb" onclick="window.location='tel:7559072471'">📞 Call</button>
+        <button class="bbwa" onclick="window.open('https://wa.me/917559072471')">💬 WhatsApp</button>
         <button class="bbg">Listings</button>
       </div>
     </div>
-    <div class="brok-card">
-      <div class="brok-row">
-        <div class="brok-av">AN</div>
-        <div>
-          <div class="brok-nm">Arun Nair</div>
-          <div class="brok-role">Land Specialist</div>
-          <div class="brok-dist">📍 Palakkad</div>
-        </div>
-        <div class="brok-rating"><div class="brok-stars">4.7★</div><div class="brok-rl">76 reviews</div></div>
-      </div>
-      <div class="brok-stats">
-        <div class="brok-s"><div class="brok-sv">76</div><div class="brok-sk">Deals</div></div>
-        <div class="brok-s" style="border-left:1px solid var(--border);"><div class="brok-sv">6yr</div><div class="brok-sk">Experience</div></div>
-        <div class="brok-s" style="border-left:1px solid var(--border);"><div class="brok-sv">KL</div><div class="brok-sk">State</div></div>
-      </div>
-      <div class="brok-btns">
-        <button class="bb">📞 Call</button>
-        <button class="bbwa">💬 WhatsApp</button>
-        <button class="bbg">Listings</button>
-      </div>
-    </div>
-    <div class="brok-card">
-      <div class="brok-row">
-        <div class="brok-av">SV</div>
-        <div>
-          <div class="brok-nm">Sunitha Varma</div>
-          <div class="brok-role">Luxury Specialist</div>
-          <div class="brok-dist">📍 Kozhikode</div>
-        </div>
-        <div class="brok-rating"><div class="brok-stars">5.0★</div><div class="brok-rl">54 reviews</div></div>
-      </div>
-      <div class="brok-stats">
-        <div class="brok-s"><div class="brok-sv">54</div><div class="brok-sk">Deals</div></div>
-        <div class="brok-s" style="border-left:1px solid var(--border);"><div class="brok-sv">5yr</div><div class="brok-sk">Experience</div></div>
-        <div class="brok-s" style="border-left:1px solid var(--border);"><div class="brok-sv">KL</div><div class="brok-sk">State</div></div>
-      </div>
-      <div class="brok-btns">
-        <button class="bb">📞 Call</button>
-        <button class="bbwa">💬 WhatsApp</button>
-        <button class="bbg">Listings</button>
-      </div>
-    </div>
-    <div style="height:24px;"></div>
+    <div style="height:28px"></div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════
-       SAVED SCREEN
-  ═══════════════════════════════════════════════ -->
+  <!-- ══════ SAVED ══════ -->
   <div class="screen" id="s-saved">
-    <div class="broker-hdr">
-      <div style="font-size:9px;color:var(--gold);letter-spacing:2px;margin-bottom:5px;text-transform:uppercase;">Collection</div>
-      <div style="font-family:var(--serif);font-size:24px;color:var(--text);">Saved Properties</div>
-      <div style="font-size:10px;color:var(--text-muted);margin-top:2px;">3 saved properties</div>
+    <div class="scr-hdr">
+      <div class="sh-eye">Collection</div>
+      <div class="sh-title">Saved Properties</div>
+      <div class="sh-sub">3 properties saved</div>
     </div>
-    <div style="height:18px;"></div>
-    <div class="saved-item" onclick="go('detail',0)">
-      <div class="saved-thumb"><img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=200&q=75" alt="" loading="lazy"/></div>
-      <div class="saved-body">
-        <div class="saved-tag">House Rent</div>
-        <div class="saved-t">4BHK Independent House</div>
-        <div class="saved-l">📍 Pattom, Thiruvananthapuram</div>
-        <div class="saved-p">₹28,000/mo</div>
-      </div>
-    </div>
-    <div class="saved-item" onclick="go('detail',1)">
-      <div class="saved-thumb"><img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?w=200&q=75" alt="" loading="lazy"/></div>
-      <div class="saved-body">
-        <div class="saved-tag">Villa Sale</div>
-        <div class="saved-t">Luxury Villa with Pool</div>
-        <div class="saved-l">📍 Kakkanad, Ernakulam</div>
-        <div class="saved-p">₹9.5 Cr</div>
-      </div>
-    </div>
-    <div class="saved-item" onclick="go('detail',2)">
-      <div class="saved-thumb"><img src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=200&q=75" alt="" loading="lazy"/></div>
-      <div class="saved-body">
-        <div class="saved-tag">Villa Sale</div>
-        <div class="saved-t">Beachfront Villa, Cherai</div>
-        <div class="saved-l">📍 Cherai Beach, Ernakulam</div>
-        <div class="saved-p">₹1.85 Cr</div>
-      </div>
-    </div>
-    <div style="height:24px;"></div>
+    <div style="height:18px"></div>
+    <div class="saved-item" onclick="go('detail',0)"><div class="sv-thumb"><img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=200&q=75" alt="" loading="lazy"/></div><div class="sv-body"><div class="sv-tag">House · Rent</div><div class="sv-t">4BHK Independent House</div><div class="sv-l">📍 Pattom, Thiruvananthapuram</div><div class="sv-p">₹28,000/mo</div></div></div>
+    <div class="saved-item" onclick="go('detail',1)"><div class="sv-thumb"><img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?w=200&q=75" alt="" loading="lazy"/></div><div class="sv-body"><div class="sv-tag">Villa · Sale</div><div class="sv-t">Luxury Villa with Pool</div><div class="sv-l">📍 Kakkanad, Ernakulam</div><div class="sv-p">₹9.5 Cr</div></div></div>
+    <div class="saved-item" onclick="go('detail',2)"><div class="sv-thumb"><img src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=200&q=75" alt="" loading="lazy"/></div><div class="sv-body"><div class="sv-tag">Villa · Sale</div><div class="sv-t">Beachfront Villa, Cherai</div><div class="sv-l">📍 Cherai Beach, Ernakulam</div><div class="sv-p">₹1.85 Cr</div></div></div>
+    <div style="height:28px"></div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════
-       PROFILE SCREEN
-  ═══════════════════════════════════════════════ -->
+  <!-- ══════ PROFILE ══════ -->
   <div class="screen" id="s-profile">
     <div class="prof-hdr">
       <div class="prof-av">B</div>
       <div class="prof-nm">Broker Account</div>
       <div class="prof-role">Kerala Properties Network</div>
-      <div class="prof-badge">✦ Verified Broker</div>
+      <div class="prof-badge">◆ Verified Broker</div>
     </div>
     <div class="prof-stats">
-      <div class="prof-sb"><div class="prof-sv">12</div><div class="prof-sk">My Listings</div></div>
-      <div class="prof-sb"><div class="prof-sv">847</div><div class="prof-sk">Profile Views</div></div>
-      <div class="prof-sb"><div class="prof-sv">34</div><div class="prof-sk">Enquiries</div></div>
+      <div class="ps-box"><div class="ps-v">12</div><div class="ps-k">My Listings</div></div>
+      <div class="ps-box"><div class="ps-v">847</div><div class="ps-k">Profile Views</div></div>
+      <div class="ps-box"><div class="ps-v">34</div><div class="ps-k">Enquiries</div></div>
     </div>
-    <div style="padding:0 20px 14px;display:flex;flex-direction:column;gap:10px;">
-      <button onclick="go('post')" style="padding:14px;border-radius:12px;border:none;background:linear-gradient(135deg,var(--gold),var(--gold-light));font-family:var(--sans);font-size:12px;font-weight:500;color:var(--obsidian);cursor:pointer;letter-spacing:0.5px;box-shadow:0 4px 16px rgba(201,168,76,0.3);">+ Post New Listing</button>
-      <button style="padding:14px;border-radius:12px;border:1px solid var(--border);background:transparent;font-family:var(--sans);font-size:12px;color:var(--text-dim);cursor:pointer;letter-spacing:0.5px;">My Active Listings</button>
+    <div style="padding:16px 20px 0;display:flex;flex-direction:column;gap:10px">
+      <button onclick="go('post')" style="padding:15px;border-radius:13px;border:none;background:linear-gradient(135deg,var(--gold),var(--gl));font-family:var(--sans);font-size:12px;font-weight:600;color:var(--bg);cursor:pointer;letter-spacing:0.5px;box-shadow:0 4px 18px rgba(200,164,50,0.35)">+ Post New Listing</button>
+      <button style="padding:15px;border-radius:13px;border:1px solid rgba(255,255,255,0.1);background:transparent;font-family:var(--sans);font-size:12px;color:var(--td);cursor:pointer;letter-spacing:0.5px">My Active Listings</button>
     </div>
     <div class="prof-menu">
-      <div class="pm-item"><span class="pm-ic">📞</span><span class="pm-lb">Contact Support</span><span class="pm-ar">›</span></div>
-      <div class="pm-item"><span class="pm-ic">🔔</span><span class="pm-lb">Notifications</span><span class="pm-ar">›</span></div>
-      <div class="pm-item"><span class="pm-ic">📊</span><span class="pm-lb">My Analytics</span><span class="pm-ar">›</span></div>
-      <div class="pm-item"><span class="pm-ic">⭐</span><span class="pm-lb">Upgrade to Premium</span><span class="pm-ar">›</span></div>
-      <div class="pm-item"><span class="pm-ic">📜</span><span class="pm-lb">Terms & Conditions</span><span class="pm-ar">›</span></div>
-      <div class="pm-item"><span class="pm-ic">🚪</span><span class="pm-lb">Sign Out</span><span class="pm-ar">›</span></div>
+      <div class="pm-i"><span class="pm-ic">🎧</span><span class="pm-lb">Contact Support</span><span class="pm-ar">›</span></div>
+      <div class="pm-i"><span class="pm-ic">🔔</span><span class="pm-lb">Notifications</span><span class="pm-ar">›</span></div>
+      <div class="pm-i"><span class="pm-ic">📊</span><span class="pm-lb">My Analytics</span><span class="pm-ar">›</span></div>
+      <div class="pm-i"><span class="pm-ic">⭐</span><span class="pm-lb">Upgrade to Premium</span><span class="pm-ar">›</span></div>
+      <div class="pm-i"><span class="pm-ic">📄</span><span class="pm-lb">Terms & Conditions</span><span class="pm-ar">›</span></div>
+      <div class="pm-i"><span class="pm-ic">🚪</span><span class="pm-lb">Sign Out</span><span class="pm-ar">›</span></div>
     </div>
-    <div style="text-align:center;padding:20px;font-size:9px;color:var(--text-muted);letter-spacing:1px;font-family:var(--serif);font-style:italic;">Kerala Homes · Luxury Real Estate · v2.1</div>
-    <div style="height:16px;"></div>
+    <div style="text-align:center;padding:22px;font-size:9px;color:var(--tm);letter-spacing:1.5px;font-family:var(--serif);font-style:italic">Keralite Brokers · Brothers by Blood · Homes by Heart</div>
+    <div style="height:20px"></div>
   </div>
 
   <!-- BOTTOM NAV -->
   <div class="bnav" id="bn">
-    <button class="bni on" id="bn-home" onclick="go('home')">
-      <div class="bni-ic">🏠</div><span class="bni-lb">Home</span>
-    </button>
-    <button class="bni" id="bn-saved" onclick="go('saved')">
-      <div class="bni-ic">♥</div><span class="bni-lb">Saved</span>
-    </button>
-    <button class="bn-center" onclick="go('post')">
-      <div class="bn-plus">+</div><span class="bn-center-lb">Post</span>
-    </button>
-    <button class="bni" id="bn-brokers" onclick="go('brokers')">
-      <div class="bni-ic">👤</div><span class="bni-lb">Brokers</span>
-    </button>
-    <button class="bni" id="bn-profile" onclick="go('profile')">
-      <div class="bni-ic">☰</div><span class="bni-lb">Profile</span>
-    </button>
+    <button class="bni on" id="bn-home" onclick="go('home')"><div class="bni-ic">🏠</div><span class="bni-lb">Home</span></button>
+    <button class="bni" id="bn-saved" onclick="go('saved')"><div class="bni-ic">♥</div><span class="bni-lb">Saved</span></button>
+    <button class="bn-c" onclick="go('post')"><div class="bn-plus">+</div><span class="bn-cl">Post</span></button>
+    <button class="bni" id="bn-brokers" onclick="go('brokers')"><div class="bni-ic">🤝</div><span class="bni-lb">Brokers</span></button>
+    <button class="bni" id="bn-profile" onclick="go('profile')"><div class="bni-ic">☰</div><span class="bni-lb">Profile</span></button>
   </div>
 
   <!-- CONTACT SHEET -->
-  <div class="sheet-overlay" id="csheet" onclick="hc()">
+  <div class="sheet-ov" id="csheet" onclick="hc()">
     <div class="sheet" onclick="event.stopPropagation()">
-      <div class="sheet-pill"></div>
-      <div class="sheet-t">Contact Broker</div>
-      <div class="sheet-s">Our verified Kerala broker will reach you promptly</div>
-      <button class="sht-btn" onclick="hc()" style="background:var(--surface2);color:var(--text);border:1px solid var(--border);">📞 Call Now</button>
-      <button class="sht-btn" onclick="hc()" style="background:rgba(37,211,102,0.12);color:#25D366;border:1px solid rgba(37,211,102,0.3);">💬 WhatsApp</button>
-      <button class="sht-btn" onclick="hc()" style="background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--obsidian);">✉️ Send Enquiry</button>
-      <button class="sht-btn" onclick="hc()" style="background:transparent;color:var(--text-muted);border:1px solid var(--border);">Cancel</button>
+      <div class="sh-pill"></div>
+      <div class="sh-t">Contact Broker</div>
+      <div class="sh-s">A verified Kerala expert will reach you within 2 hours</div>
+      <button class="sh-btn" onclick="window.location='tel:'+curBrPh;hc()" style="background:var(--s2);color:var(--tx);border:1px solid rgba(255,255,255,0.1)">📞 Call Now</button>
+      <button class="sh-btn" onclick="window.open('https://wa.me/91'+curBrPh);hc()" style="background:rgba(37,211,102,0.1);color:#25D366;border:1px solid rgba(37,211,102,0.3)">💬 WhatsApp</button>
+      <button class="sh-btn" onclick="hc()" style="background:linear-gradient(135deg,var(--gold),var(--gl));color:var(--bg);font-weight:600">✉ Send Enquiry</button>
+      <button class="sh-btn" onclick="hc()" style="background:transparent;color:var(--tm);border:1px solid rgba(255,255,255,0.08)">Cancel</button>
     </div>
   </div>
 </div>
@@ -899,73 +639,116 @@ img{object-fit:cover;display:block;}
 function tick(){var n=new Date();document.getElementById('clk').textContent=('0'+n.getHours()).slice(-2)+':'+('0'+n.getMinutes()).slice(-2);}
 tick();setInterval(tick,30000);
 
+// Hero banner data
+var HERO=[
+  {idx:1,img:'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=800&q=85',pr:'₹9.5 Cr',nm:'Luxury Villa with Pool',loc:'Kakkanad, Ernakulam',typ:'sale'},
+  {idx:2,img:'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=800&q=85',pr:'₹1.85 Cr',nm:'Beachfront Villa, Cherai',loc:'Cherai Beach, Ernakulam',typ:'sale'},
+  {idx:3,img:'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&q=85',pr:'₹75 L',nm:'Nalukettu Heritage Home',loc:'Thrissur City',typ:'sale'},
+  {idx:0,img:'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=85',pr:'₹28,000/mo',nm:'4BHK Independent House',loc:'Pattom, Thiruvananthapuram',typ:'rent'},
+];
+var heroI=0,heroIdx=HERO[0].idx,heroTimer;
+
+function setHero(i){
+  heroI=i;heroIdx=HERO[i].idx;
+  var d=HERO[i];
+  var img=document.getElementById('hb-img');
+  img.style.opacity=0;
+  setTimeout(function(){img.src=d.img;img.style.opacity=1;},200);
+  document.getElementById('hb-price').textContent=d.pr;
+  document.getElementById('hb-name').textContent=d.nm;
+  document.getElementById('hb-loc').textContent='📍 '+d.loc;
+  document.getElementById('hb-badge').innerHTML='<span class="badge '+(d.typ==='rent'?'b-r':'b-s')+'">'+(d.typ==='rent'?'For Rent':'For Sale')+'</span>';
+  var dots=document.getElementById('hb-dots');
+  dots.innerHTML='';
+  HERO.forEach(function(_,j){
+    var dot=document.createElement('div');
+    dot.className='hb-dot'+(j===i?' on':'');
+    dot.onclick=function(e){e.stopPropagation();clearInterval(heroTimer);setHero(j);startHeroTimer();};
+    dots.appendChild(dot);
+  });
+}
+function startHeroTimer(){heroTimer=setInterval(function(){setHero((heroI+1)%HERO.length);},4000);}
+setHero(0);
+startHeroTimer();
+function toggleHbHeart(){var h=document.getElementById('hb-heart');h.style.color=h.style.color==='#F87171'?'var(--td)':'#F87171';h.style.borderColor=h.style.color==='#F87171'?'rgba(248,113,113,0.4)':'rgba(255,255,255,0.12)';}
+
 // Detail data
 var DET=[
-  {img:'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=900&q=85',tag:'HOUSE RENT',typ:'rent',ti:'4BHK Independent House',lo:'Pattom, Thiruvananthapuram',pr:'₹28,000/mo',b:4,ba:3,sf:'2,200',am:'Covered Parking · 24/7 Water · Power Backup · Gated Compound'},
-  {img:'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=900&q=85',tag:'VILLA SALE',typ:'sale',ti:'Luxury Villa with Swimming Pool',lo:'Kakkanad, Ernakulam',pr:'₹9.5 Cr',b:5,ba:4,sf:'3,800',am:'Swimming Pool · Gym · Clubhouse · 3-Car Parking'},
-  {img:'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=900&q=85',tag:'VILLA SALE',typ:'sale',ti:'Beachfront Villa, Cherai Beach',lo:'Cherai Beach, Ernakulam',pr:'₹1.85 Cr',b:4,ba:3,sf:'3,200',am:'Sea View · Beach Access · Private Garden · Security'},
-  {img:'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=900&q=85',tag:'HOUSE SALE',typ:'sale',ti:'Traditional Nalukettu Heritage Home',lo:'Thrissur City, Thrissur',pr:'₹75 L',b:6,ba:4,sf:'4,200',am:'Heritage Structure · Central Courtyard · Teak Wood · 100yr Old'},
-  {img:'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=900&q=85',tag:'FLAT RENT',typ:'rent',ti:'3BHK Premium Apartment',lo:'Marine Drive, Ernakulam',pr:'₹32,000/mo',b:3,ba:2,sf:'1,800',am:'Gym · Pool · 24/7 Security · Lift · Parking'},
-  {img:'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=900&q=85',tag:'FLAT RENT',typ:'rent',ti:'2BHK Sea View Apartment',lo:'Beach Road, Kozhikode',pr:'₹18,000/mo',b:2,ba:2,sf:'1,200',am:'Sea View · Furnished · Balcony · Modular Kitchen'},
-  {img:'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=900&q=85',tag:'PLOT SALE',typ:'sale',ti:'Residential Plot — DTCP Approved',lo:'Palakkad Bypass, Palakkad',pr:'₹42 L',b:0,ba:0,sf:'',cents:'15 Cents',am:'DTCP Approved · North Facing · Road Access · Clear Title'},
-  {img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=85',tag:'HOUSE RENT',typ:'rent',ti:'3BHK Near Guruvayur Temple',lo:'Guruvayur, Thrissur',pr:'₹20,000/mo',b:3,ba:2,sf:'1,600',am:'Temple Walk · Parking · 24/7 Water · Independent'},
+  {img:'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=900&q=85',lbl:'HOUSE RENT',typ:'rent',ti:'4BHK Independent House',tg:'Spacious family home in the heart of the capital',lo:'Pattom, Thiruvananthapuram',pr:'₹28,000/mo',b:4,ba:3,sf:'2,200',am:'Covered Parking · 24/7 Water · Power Backup · Gated Compound',br:'RK',brnm:'Renju Krishna',brrole:'Co-Founder · Senior Broker'},
+  {img:'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=900&q=85',lbl:'VILLA SALE',typ:'sale',ti:'Luxury Villa with Swimming Pool',tg:'Where opulence meets the Kerala skyline',lo:'Kakkanad, Ernakulam',pr:'₹9.5 Cr',b:5,ba:4,sf:'3,800',am:'Swimming Pool · Gym · Clubhouse · 3-Car Parking',br:'HK',brnm:'Hari Krishna',brrole:'Co-Founder · Property Consultant'},
+  {img:'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=900&q=85',lbl:'VILLA SALE',typ:'sale',ti:'Beachfront Villa, Cherai Beach',tg:'Fall asleep to the sound of the Arabian Sea',lo:'Cherai Beach, Ernakulam',pr:'₹1.85 Cr',b:4,ba:3,sf:'3,200',am:'Sea View · Beach Access · Private Garden · Security',br:'HK',brnm:'Hari Krishna',brrole:'Co-Founder · Property Consultant'},
+  {img:'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=900&q=85',lbl:'HOUSE SALE',typ:'sale',ti:'Traditional Nalukettu Heritage Home',tg:'A century of stories waiting to become yours',lo:'Thrissur City, Thrissur',pr:'₹75 L',b:6,ba:4,sf:'4,200',am:'Heritage Structure · Central Courtyard · Teak Wood · 100yr Old',br:'RK',brnm:'Renju Krishna',brrole:'Co-Founder · Senior Broker'},
+  {img:'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=900&q=85',lbl:'FLAT RENT',typ:'rent',ti:'3BHK Premium Apartment',tg:'Waking up to Marine Drive every morning',lo:'Marine Drive, Ernakulam',pr:'₹32,000/mo',b:3,ba:2,sf:'1,800',am:'Gym · Pool · 24/7 Security · Lift · Parking',br:'HK',brnm:'Hari Krishna',brrole:'Co-Founder · Property Consultant'},
+  {img:'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=900&q=85',lbl:'FLAT RENT',typ:'rent',ti:'2BHK Sea View Apartment',tg:'Golden sunsets over Kozhikode\'s horizon',lo:'Beach Road, Kozhikode',pr:'₹18,000/mo',b:2,ba:2,sf:'1,200',am:'Sea View · Furnished · Balcony · Modular Kitchen',br:'HK',brnm:'Hari Krishna',brrole:'Co-Founder · Property Consultant'},
+  {img:'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=900&q=85',lbl:'PLOT SALE',typ:'sale',ti:'Residential Plot — DTCP Approved',tg:'Build your dream on fertile Kerala soil',lo:'Palakkad Bypass, Palakkad',pr:'₹42 L',b:0,ba:0,sf:'',cents:'15 Cents',am:'DTCP Approved · North Facing · Road Access · Clear Title',br:'RK',brnm:'Renju Krishna',brrole:'Co-Founder · Senior Broker'},
+  {img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=85',lbl:'HOUSE RENT',typ:'rent',ti:'3BHK Near Guruvayur Temple',tg:'Live in the spiritual heart of Kerala',lo:'Guruvayur, Thrissur',pr:'₹20,000/mo',b:3,ba:2,sf:'1,600',am:'Temple Walk · Parking · 24/7 Water · Independent',br:'RK',brnm:'Renju Krishna',brrole:'Co-Founder · Senior Broker'},
 ];
 
+var BRPH={RK:'9947044118',HK:'7559072471'};
+var curBrPh='';
+
 function renderDet(i){
-  var d=DET[i];var r=d.typ==='rent';
+  var d=DET[i],r=d.typ==='rent';
+  curBrPh=BRPH[d.br]||'';
   document.getElementById('det-inner').innerHTML=
-    '<div class="det-hero"><img src="'+d.img+'" alt="" loading="lazy"/><div class="det-hero-overlay"></div>'+
+    '<div class="det-hero"><img src="'+d.img+'" alt="" loading="lazy"/><div class="det-ov"></div>'+
     '<button class="det-back" onclick="go(\'home\')">←</button>'+
-    '<button class="det-share">⬆</button><button class="det-hrt">♡</button>'+
-    '<div class="det-pricebar">'+
-    '<div><div class="det-price">'+d.pr+'</div><div class="det-subloc">📍 '+d.lo+'</div></div>'+
-    '<span class="badge '+(r?'badge-r':'badge-s')+'">'+(r?'For Rent':'For Sale')+'</span>'+
-    '</div></div>'+
+    '<button class="det-share">⬆</button><button class="det-fav">♡</button>'+
+    '<div class="det-btm"><div><div class="det-price">'+d.pr+'</div><div class="det-sub">📍 '+d.lo+'</div></div>'+
+    '<span class="badge '+(r?'b-r':'b-s')+'">'+(r?'For Rent':'For Sale')+'</span></div></div>'+
     '<div class="det-body">'+
-    '<div class="det-tag">'+d.tag+'</div>'+
+    '<div class="det-lbl">'+d.lbl+'</div>'+
     '<div class="det-title">'+d.ti+'</div>'+
+    '<div class="det-tagline">"'+d.tg+'"</div>'+
     '<div class="det-loc">📍 '+d.lo+', Kerala</div>'+
     '<div class="spec-grid">'+
-    (d.b?'<div class="spec-box"><div class="spec-box-ic">🛏</div><div class="spec-box-v">'+d.b+'</div><div class="spec-box-k">Beds</div></div>':'')+
-    (d.ba?'<div class="spec-box"><div class="spec-box-ic">🚿</div><div class="spec-box-v">'+d.ba+'</div><div class="spec-box-k">Baths</div></div>':'')+
-    (d.sf?'<div class="spec-box"><div class="spec-box-ic">📐</div><div class="spec-box-v">'+d.sf+'</div><div class="spec-box-k">Sq Ft</div></div>':'')+
-    (d.cents?'<div class="spec-box"><div class="spec-box-ic">🌿</div><div class="spec-box-v">'+d.cents+'</div><div class="spec-box-k">Land</div></div>':'')+
-    '<div class="spec-box"><div class="spec-box-ic">🔑</div><div class="spec-box-v">Ready</div><div class="spec-box-k">Status</div></div>'+
+    (d.b?'<div class="sg-box"><div class="sg-ic">🛏</div><div class="sg-v">'+d.b+'</div><div class="sg-k">Beds</div></div>':'')+
+    (d.ba?'<div class="sg-box"><div class="sg-ic">🚿</div><div class="sg-v">'+d.ba+'</div><div class="sg-k">Baths</div></div>':'')+
+    (d.sf?'<div class="sg-box"><div class="sg-ic">📐</div><div class="sg-v">'+d.sf+'</div><div class="sg-k">Sq Ft</div></div>':'')+
+    (d.cents?'<div class="sg-box"><div class="sg-ic">🌿</div><div class="sg-v">'+d.cents+'</div><div class="sg-k">Land</div></div>':'')+
+    '<div class="sg-box"><div class="sg-ic">✅</div><div class="sg-v">Ready</div><div class="sg-k">Status</div></div>'+
     '</div>'+
-    '<div class="info-panel"><div class="info-t">About This Property</div><div class="info-p">This '+d.tag.toLowerCase()+' is located in '+d.lo+', one of Kerala\'s most coveted addresses. '+(r?'Available immediately for rent with a clean rental agreement.':'Ready for registration with clear title documents.')+' Well-connected to key landmarks, schools, hospitals, and transport networks across the district.</div></div>'+
-    '<div class="info-panel"><div class="info-t">Amenities & Features</div><div class="amen-row">'+d.am.split(' · ').map(function(a){return'<span class="amen">'+a+'</span>';}).join('')+'</div></div>'+
-    '<div class="info-panel"><div class="info-t">Location</div><div class="map-ph" style="background:var(--surface2);border-radius:12px;height:100px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">'+
-    '<svg viewBox="0 0 340 100" style="position:absolute;inset:0;width:100%;height:100%;opacity:0.15"><defs><pattern id="mg" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M28 0L0 0 0 28" fill="none" stroke="#C9A84C" stroke-width="0.5"/></pattern></defs><rect width="340" height="100" fill="url(#mg)"/><circle cx="170" cy="50" r="14" fill="none" stroke="#C9A84C" stroke-width="1.5"/><circle cx="170" cy="50" r="5" fill="#C9A84C"/><circle cx="170" cy="50" r="24" fill="none" stroke="#C9A84C" stroke-width="0.5"/></svg>'+
-    '<div style="position:relative;z-index:1;text-align:center;font-family:var(--serif);font-size:12px;color:var(--text-dim);">📍 '+d.lo+'</div></div></div>'+
+    '<div class="info-box"><div class="ib-t">About This Property</div><div class="ib-p">This '+d.lbl.toLowerCase()+' is nestled in '+d.lo+', one of Kerala\'s most coveted addresses. '+(r?'Available immediately for rent with a clean, hassle-free rental agreement.':'Ready for immediate registration with clear title documents and full legal compliance.')+' Exceptionally well-connected to schools, hospitals, and transport links across the district.</div></div>'+
+    '<div class="info-box"><div class="ib-t">Amenities & Features</div><div class="amen-wrap">'+d.am.split(' · ').map(function(a){return'<span class="amen">'+a+'</span>';}).join('')+'</div></div>'+
+    '<div class="broker-prev">'+
+    '<div class="bp-av">'+d.br+'</div>'+
+    '<div style="flex:1"><div class="bp-nm">'+d.brnm+'</div><div class="bp-role">'+d.brrole+'</div><div class="bp-resp">⚡ Responds within 2 hours</div></div>'+
+    '<div class="bp-stars"><div class="bp-star-v">4.9 ★</div><div class="bp-rl">Verified Expert</div></div>'+
     '</div>'+
-    '<div class="det-cta"><button class="cta-call">📞 Call</button><button class="cta-wa" onclick="sc()">💬 WhatsApp Broker</button></div>';
+    '<div class="info-box"><div class="ib-t">Location</div><div class="map-box">'+
+    '<svg viewBox="0 0 340 110" style="position:absolute;inset:0;width:100%;height:100%;opacity:0.12"><defs><pattern id="g" width="26" height="26" patternUnits="userSpaceOnUse"><path d="M26 0L0 0 0 26" fill="none" stroke="#C8A432" stroke-width="0.5"/></pattern></defs><rect width="340" height="110" fill="url(#g)"/><circle cx="170" cy="55" r="16" fill="none" stroke="#C8A432" stroke-width="1.5"/><circle cx="170" cy="55" r="5" fill="#C8A432"/><circle cx="170" cy="55" r="28" fill="none" stroke="#C8A432" stroke-width="0.5" stroke-dasharray="4,4"/></svg>'+
+    '<div style="position:relative;z-index:1;text-align:center;font-family:var(--serif);font-size:13px;color:var(--td)">📍 '+d.lo+'</div></div></div>'+
+    '</div>'+
+    '<div class="det-cta"><button class="cta-call" onclick="window.location=\'tel:\'+curBrPh">📞 Call</button><button class="cta-wa" onclick="sc()">💬 WhatsApp Expert</button></div>';
 }
 
-// Step content
+// Post steps
 var SHTML=[
-'<div class="fst">Property Type</div><div class="fss">What are you listing today?</div><div class="tgrid"><div class="tcard on" onclick="selT(this)"><div class="tic">🏠</div><div class="tnm">For Rent</div><div class="tsub">Monthly rental</div></div><div class="tcard" onclick="selT(this)"><div class="tic">🏷</div><div class="tnm">For Sale</div><div class="tsub">Outright purchase</div></div></div><div class="flbl" style="margin-bottom:10px;">Property Category</div><div class="cat-row"><div class="ctile on" onclick="selC(this)"><div class="cic">🏠</div><div class="cnm">House</div></div><div class="ctile" onclick="selC(this)"><div class="cic">🏢</div><div class="cnm">Flat</div></div><div class="ctile" onclick="selC(this)"><div class="cic">🏛</div><div class="cnm">Villa</div></div><div class="ctile" onclick="selC(this)"><div class="cic">📐</div><div class="cnm">Plot</div></div></div><div class="fgrp"><div class="flbl">District in Kerala</div><select class="fsel"><option>Thrissur</option><option>Ernakulam</option><option>Thiruvananthapuram</option><option>Kozhikode</option><option>Palakkad</option><option>Malappuram</option><option>Kottayam</option><option>Kollam</option><option>Alappuzha</option><option>Idukki</option><option>Wayanad</option><option>Kannur</option><option>Kasaragod</option><option>Pathanamthitta</option></select></div>',
+'<div class="fst">Property Type</div><div class="fss">What are you listing today?</div><div class="tgrid"><div class="tcard on" onclick="selT(this)"><div class="tic">🏠</div><div class="tnm">For Rent</div><div class="tsub">Monthly rental</div></div><div class="tcard" onclick="selT(this)"><div class="tic">🏷</div><div class="tnm">For Sale</div><div class="tsub">Outright purchase</div></div></div><div class="flbl" style="margin-bottom:10px">Property Category</div><div class="cat-row"><div class="ctile on" onclick="selC(this)"><div class="cic">🏠</div><div class="cnm">House</div></div><div class="ctile" onclick="selC(this)"><div class="cic">🏢</div><div class="cnm">Flat</div></div><div class="ctile" onclick="selC(this)"><div class="cic">🏡</div><div class="cnm">Villa</div></div><div class="ctile" onclick="selC(this)"><div class="cic">🌿</div><div class="cnm">Plot</div></div></div><div class="fgrp"><div class="flbl">District in Kerala</div><select class="fsel"><option>Thrissur</option><option>Ernakulam</option><option>Thiruvananthapuram</option><option>Kozhikode</option><option>Palakkad</option><option>Malappuram</option><option>Kottayam</option><option>Kollam</option><option>Alappuzha</option><option>Idukki</option><option>Wayanad</option><option>Kannur</option><option>Kasaragod</option><option>Pathanamthitta</option></select></div>',
 '<div class="fst">Property Details</div><div class="fss">Tell buyers about your property</div><div class="fgrp"><div class="flbl">Listing Title</div><input class="finp" placeholder="e.g. 3BHK House near Thrissur Town"/></div><div class="fgrp"><div class="flbl">Exact Locality</div><input class="finp" placeholder="e.g. Swaraj Round, Kakkanad, Pattom…"/></div><div class="frow2"><div class="fgrp"><div class="flbl">Price (₹)</div><input class="finp" type="number" placeholder="25000"/></div><div class="fgrp"><div class="flbl">Sq Ft / Cents</div><input class="finp" type="number" placeholder="1800"/></div></div><div class="frow2"><div class="fgrp"><div class="flbl">Bedrooms</div><input class="finp" type="number" placeholder="3"/></div><div class="fgrp"><div class="flbl">Bathrooms</div><input class="finp" type="number" placeholder="2"/></div></div><div class="fgrp"><div class="flbl">Description</div><textarea class="fta" placeholder="Nearby landmarks, special features, commute info…"></textarea></div>',
-'<div class="fst">Add Photos</div><div class="fss">Properties with photos get 3× more enquiries</div><div class="pgrid"><div class="pmain"><div style="font-size:24px;color:var(--gold);">📷</div><div style="font-size:9px;font-weight:500;color:var(--gold);margin-top:5px;letter-spacing:0.8px;">MAIN PHOTO</div></div><div class="pslot"><span style="font-size:22px;opacity:0.2;color:var(--gold);">+</span></div><div class="pslot"><span style="font-size:22px;opacity:0.2;color:var(--gold);">+</span></div><div class="pslot"><span style="font-size:22px;opacity:0.2;color:var(--gold);">+</span></div><div class="pslot"><span style="font-size:22px;opacity:0.2;color:var(--gold);">+</span></div><div class="pslot"><span style="font-size:22px;opacity:0.2;color:var(--gold);">+</span></div></div><div class="tip amber"><span style="font-size:16px;">✦</span><div class="tipt" style="color:var(--gold-light);">Upload front view, living room, kitchen & bedrooms. <strong>JPG/PNG, max 5MB each.</strong> Up to 20 photos.</div></div>',
-'<div class="fst">Your Details</div><div class="fss">Buyers will contact you directly</div><div class="fgrp"><div class="flbl">Full Name</div><input class="finp" placeholder="Your full name"/></div><div class="fgrp"><div class="flbl">Mobile Number</div><input class="finp" type="tel" placeholder="+91 98XXX XXXXX"/></div><div class="pvc"><div class="pvl">Listing Preview</div><div class="pvt">Your Property Listing</div><div class="pvlc">📍 Kerala, India</div><div class="pvp">₹ —</div></div><div class="tip green"><span style="font-size:16px;">✓</span><div class="tipt" style="color:rgba(74,222,128,0.8);">Listing reviewed by our Kerala team and published within <strong>2 hours</strong>. WhatsApp confirmation sent to your number.</div></div>'
+'<div class="fst">Add Photos</div><div class="fss">Properties with photos get 3× more enquiries</div><div class="pgrid"><div class="pmain"><div style="font-size:26px;color:var(--gold)">📷</div><div style="font-size:9px;font-weight:600;color:var(--gold);margin-top:6px;letter-spacing:0.8px">MAIN PHOTO</div></div><div class="pslot"><span style="font-size:24px;opacity:0.2;color:var(--gold)">+</span></div><div class="pslot"><span style="font-size:24px;opacity:0.2;color:var(--gold)">+</span></div><div class="pslot"><span style="font-size:24px;opacity:0.2;color:var(--gold)">+</span></div><div class="pslot"><span style="font-size:24px;opacity:0.2;color:var(--gold)">+</span></div><div class="pslot"><span style="font-size:24px;opacity:0.2;color:var(--gold)">+</span></div></div><div class="tip amber"><span style="font-size:16px">💡</span><div class="tipt" style="color:rgba(232,200,106,0.9)">Upload front view, living room, kitchen & bedrooms. <strong>JPG/PNG, max 5MB each.</strong> Up to 20 photos.</div></div>',
+'<div class="fst">Your Details</div><div class="fss">Buyers will reach you directly</div><div class="fgrp"><div class="flbl">Full Name</div><input class="finp" placeholder="Your full name"/></div><div class="fgrp"><div class="flbl">Mobile Number</div><input class="finp" type="tel" placeholder="+91 98XXX XXXXX"/></div><div class="pvc"><div class="pvl">Listing Preview</div><div class="pvt">Your Property Listing</div><div class="pvlc">📍 Kerala, India</div><div class="pvp">₹ —</div></div><div class="tip teal"><span style="font-size:16px">✅</span><div class="tipt" style="color:rgba(20,184,166,0.9)">Reviewed by our Kerala team and published within <strong>2 hours</strong>. WhatsApp confirmation sent to your number.</div></div>'
 ];
 
 var step=1;
 function renderStep(n){
   document.getElementById('steplbl').textContent='Step '+n+' of 4';
-  var segs=document.querySelectorAll('.prog-seg');
-  segs.forEach(function(s,i){s.style.background=i+1<=n?'var(--gold)':'var(--border)';});
+  var segs=document.querySelectorAll('.prog-s');
+  segs.forEach(function(s,i){s.style.background=i+1<=n?'var(--gold)':'rgba(255,255,255,0.1)';});
   var bk=n>1?'<button class="nbb" onclick="cs('+(n-1)+')">← Back</button>':'';
   var nx=n<4?'<button class="nbn" onclick="cs('+(n+1)+')">Continue →</button>':'<button class="nbs" onclick="sub()">Submit Listing ✓</button>';
   document.getElementById('stepwrap').innerHTML=SHTML[n-1]+'<div class="nav-btns">'+bk+nx+'</div>';
 }
 function cs(n){step=n;renderStep(n);}
-function sub(){alert('✦ Listing Submitted!\n\nOur Kerala team will review and publish your property within 2 hours.\nYou will receive a WhatsApp confirmation shortly.');go('home');}
-function selT(el){document.querySelectorAll('.tcard').forEach(function(c){c.classList.remove('on');c.querySelector('.tnm').style.color='';});el.classList.add('on');}
-function selC(el){document.querySelectorAll('.ctile').forEach(function(c){c.classList.remove('on');c.querySelector('.cnm').style.color='';});el.classList.add('on');}
+function sub(){alert('✅ Listing Submitted!\n\nOur Kerala team will review and publish within 2 hours.\nWhatsApp confirmation coming shortly.');go('home');}
+function selT(el){document.querySelectorAll('.tcard').forEach(function(c){c.classList.remove('on');});el.classList.add('on');}
+function selC(el){document.querySelectorAll('.ctile').forEach(function(c){c.classList.remove('on');});el.classList.add('on');}
 
-// Nav
+// Navigation
 function go(scr,idx){
-  ['home','detail','post','brokers','saved','profile'].forEach(function(s){var el=document.getElementById('s-'+s);if(el){el.style.display='none';el.classList.remove('active');}});
+  ['home','detail','post','brokers','saved','profile'].forEach(function(s){
+    var el=document.getElementById('s-'+s);if(el){el.style.display='none';el.classList.remove('active');}
+  });
   var bn=document.getElementById('bn');
   if(scr==='detail'){
     var el=document.getElementById('s-detail');el.style.display='block';el.classList.add('active');
@@ -976,20 +759,20 @@ function go(scr,idx){
   } else {
     var el=document.getElementById('s-'+scr)||document.getElementById('s-home');
     el.style.display='block';el.classList.add('active');el.scrollTop=0;
-    bn.style.display='flex';
-    setNav('bn-'+scr);
+    bn.style.display='flex';setNav('bn-'+scr);
   }
 }
 function setNav(id){
   ['bn-home','bn-saved','bn-brokers','bn-profile'].forEach(function(n){
     var el=document.getElementById(n);if(!el)return;
-    if(el.id===id){el.classList.add('on');}else{el.classList.remove('on');}
+    el.classList.toggle('on',el.id===id);
   });
 }
 function dchip(el){document.querySelectorAll('#dc .chip').forEach(function(c){c.classList.remove('on');});el.classList.add('on');}
 function tchip(el){document.querySelectorAll('#tc .chip').forEach(function(c){c.classList.remove('on');});el.classList.add('on');}
 function sc(){document.getElementById('csheet').style.display='flex';}
 function hc(){document.getElementById('csheet').style.display='none';}
+
 renderStep(1);
 </script>
 </body>
